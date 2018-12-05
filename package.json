@@ -1,0 +1,25 @@
+{
+  "name": "it-jobb-tracker",
+  "version": "1.0.0",
+  "description": "A webbapplication for job hunting by simply walking and looking at your phone",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/WilleAsander/IT-job-tracker.git"
+  },
+  "author": "Ivan Sedelkin, Erik Malmsten, Wilhelm Åsander",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/WilleAsander/IT-job-tracker/issues"
+  },
+  "homepage": "https://github.com/WilleAsander/IT-job-tracker#readme",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "express": "^4.16.4",
+    "mongoose": "^5.3.14"
+  }
+}
