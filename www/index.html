@@ -9,28 +9,12 @@
     <link rel="stylesheet" type="text/css" media="screen" href="assets/css/main.css" />
     <script src="assets/vendor/jquery-3.3.1.min.js"></script>
     <script src="assets/vendor/bootstrap/js/bootstrap.js"></script>
-    <script src="assets/js/main.js"></script>
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAXSFjyi9xZvkCtCqfdfpuiNUR_vQNns84&libraries=places"></script>
+    
 </head>
 <body>
     <button id="locationButton">Get your location</button>
+    <div id="map"></div>
+<script src="assets/js/main.js"></script>
 </body>
-<script>
-    
-    $('#locationButton').click(function(){
-    if(navigator.geolocation){
-        navigator.geolocation.getCurrentPosition(function(position){
-            console.log(position); 
-            $.get( "https://maps.googleapis.com/maps/api/geocode/json?latlng="+ position.coords.latitude + "," + position.coords.longitude +"&key=AIzaSyAXSFjyi9xZvkCtCqfdfpuiNUR_vQNns84&sensor=true", function(data) {
-                    console.log(data);
-            });
-        });
-        
-    }
-
-    else{
-        console.log('geolocation not supported');
-    }
-});
-
-</script>
 </html>
