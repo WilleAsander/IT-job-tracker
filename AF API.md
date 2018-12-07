@@ -21,9 +21,4 @@ To get requrest from Postman:
 Go to headers add 3 keys
 1st Key:Accept  Value: application/xml 
 2nd Key:Accept-Language Value: sv
-3rd Key: From  Value: YOUREMAIL-HERE
-
-
-
-
-
+3rd Key: From  Value: YOUREMAIL-HERE (optional)

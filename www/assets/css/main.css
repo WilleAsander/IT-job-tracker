@@ -7,3 +7,9 @@ html, body {
     margin: 0;
     padding: 0;
 }
+
+#main {
+    height: 50%;
+    width: 50%;
+    padding: 5px;
+}
