@@ -2,7 +2,7 @@
 var ltn;
 var lgt;
     $('#locationButton').click(function(){
-    
+    document.getElementById('map').style.display = "block";
     if(navigator.geolocation){
         navigator.geolocation.getCurrentPosition(function(position){
             console.log(position); 
@@ -35,7 +35,7 @@ var lgt;
         center: userLocation,
         zoom: 15
         });
-
+    
     var request = {
         location: userLocation,
         radius: '5000'
