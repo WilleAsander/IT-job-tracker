@@ -1,5 +1,8 @@
 #map {
     height: 100%;
+    border-radius: 20px;
+    border: 1px solid black;
+    display: none;
 }
 
 html, body {
@@ -7,3 +10,22 @@ html, body {
     margin: 0;
     padding: 0;
 }
+
+.map-container {
+    width: 50%;
+    height: 70%;
+    float: none;
+    margin:auto;
+    margin-top: 10px;
+}
+
+header {
+    width: 100%;
+}
+
+#locationButton {
+    margin-left: 10px;
+    margin-top: 10px;
+    float: left;
+}
+ 

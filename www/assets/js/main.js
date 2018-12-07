@@ -19,6 +19,7 @@ var jobName;
 //function to start on click of a button
 $('#locationButton').click(function(){
     //find users current location
+  document.getElementById('map').style.display = "block";
     if(navigator.geolocation){
         navigator.geolocation.getCurrentPosition(function(position){ 
             //Users coordinates
@@ -133,6 +134,3 @@ function initialize(address, jobName) {
             })(marker));
         }
       });
-      
-
-}
