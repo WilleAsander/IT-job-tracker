@@ -14,8 +14,10 @@
 
 - Now the web app should be in front of you. 
 
+- Go through all the pages and try the features as you like.
 
-
-- To close the app, go back to the **command console** and press **Ctrl + C** and the server running the app will shut down.
+- To **close** the app, head back to the **command console** and press **Ctrl + C** and the server running the app will shut down.
 
 - Close the window in you browser and you are done!
+
+- Thank you for testing our web application, if you have any ideas or thoughts that you would like to share with us you can message us.
