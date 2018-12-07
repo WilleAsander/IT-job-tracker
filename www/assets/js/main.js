@@ -134,3 +134,4 @@ function initialize(address, jobName) {
             })(marker));
         }
       });
+}
