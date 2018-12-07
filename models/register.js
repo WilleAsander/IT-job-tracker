@@ -8,4 +8,4 @@ var RegisterSchema = new Schema({
     password: {type: String, required: true, max: 100} 
 });
 
-module.exports = mongoose.model('User', RegisterSchema);
+module.exports = mongoose.model('Register', RegisterSchema);
