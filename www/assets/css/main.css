@@ -7,3 +7,13 @@ html, body {
     margin: 0;
     padding: 0;
 }
+
+.map-container {
+    width: 50%;
+    height: 50%;
+    margin: auto;
+}
+
+header {
+    width: 100%;
+}
