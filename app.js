@@ -1,20 +1,20 @@
 var express = require('express');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
-var register = require('./routers/register');
+var location = require('./routers/location');
 var PORT = process.env.PORT || 4242;
 var app = express();
 
-var db_url = 'mongodb://User:Passw0rd@ds227654.mlab.com:27654/itjobb-login';
+/*var db_url = 'mongodb://User1:passw0rd@ds113454.mlab.com:13454/winegoofs';
 mongoose.connect(db_url, {useNewUrlParser: true});
 mongoose.Promise = global.Promise;
 var db = mongoose.connection;
-db.on('error', console.error.bind(console, 'MongoDB connection error: '));
+db.on('error', console.error.bind(console, 'MongoDB connection error: '));*/
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 
-app.use('/register', register);
+app.use('/location', location);
 app.use('/', express.static(__dirname + '/www'));
 //app.use('/', home);
 
