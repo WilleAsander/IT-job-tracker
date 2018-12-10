@@ -10,12 +10,33 @@
     <script src="assets/vendor/jquery-3.3.1.min.js"></script>
     <script src="assets/vendor/bootstrap/js/bootstrap.js"></script>
     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAXSFjyi9xZvkCtCqfdfpuiNUR_vQNns84&libraries=places"></script>
-    
 </head>
 <body>
-    <div id= "main">
-    <button id="locationButton">Get your location</button>
-    <div id="map"></div>
-<script src="assets/js/main.js"></script>
+    <header>
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                    <a class="navbar-brand" href="#">IT-Jobb</a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                      <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarNav">
+                      <ul class="navbar-nav">
+                        <li class="nav-item active">
+                          <a class="nav-link" href="#">Jobb-Sökare<span class="sr-only">(current)</span></a>
+                        </li>
+                       <!--<li class="nav-item">
+                          <a class="nav-link" href="#">Min profil</a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link" href="#">Om Oss</a>
+                        </li>--> 
+                      </ul>
+                    </div>
+                  </nav>
+    </header>
+    <button id="locationButton" class="btn btn-dark">Get your location</button>
+    <div class="map-container rounded">
+        <div id="map"></div>
+    </div>
+  <script src="assets/js/main.js"></script>  
 </body>
 </html>
