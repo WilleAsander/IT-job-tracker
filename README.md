@@ -1,5 +1,8 @@
 **Continuously write what you have done here**
 
+
+-----------------------------------------------------------------------------
+
 ## How to run the web-application localy from your browser:
 
 - Start by cloning this repository into any folder on your computer, the folder will be named **IT-job-tracker** by default.
