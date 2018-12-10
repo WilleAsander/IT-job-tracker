@@ -14,6 +14,8 @@ var userURL;
 var userLocal;
 var address;
 var jobName;
+var markers = [];
+var markerCoor;
 
 //=========================================================================GET YOUR LOCATION===========================================================================================
 //function to start on click of a button
@@ -109,6 +111,17 @@ function initialize(address, jobName) {
         center: userLocation,
         zoom: 15
         });
+        var radius = new google.maps.Circle({
+                strokeColor: '#00FF7F',
+                strokeOpacity: 0.8,
+                strokeWeight: 2,
+                fillColor: '#00FA9A',
+                fillOpacity: 0.35,
+                center: userLocation,
+                radius: 5000,
+                clickable: false,
+  		        map: map
+            });
     //create the infowindow for displaying info about the location of the marker
     infowindow = new google.maps.InfoWindow();
     //initialize geocoder
@@ -119,11 +132,20 @@ function initialize(address, jobName) {
         {
             markerLtn = results[0].geometry.location.lat;
             markerLgn = results[0].geometry.location.lng;
+
+
+            
+            if(radius) map.fitBounds(radius.getBounds());
             //create the marker based of coordinates
-            marker = new google.maps.Marker({
-                position: results[0].geometry.location,
-                map: map
-            });
+            var distance_from_location = google.maps.geometry.spherical.computeDistanceBetween(userLocation, results[0].geometry.location);
+            if (distance_from_location <= 5000){
+                marker = new google.maps.Marker({
+                    position: results[0].geometry.location,
+                    map: map
+                });
+            }
+            
+
 
             //an event that makes the infowindow pop up after marker is clicked
             google.maps.event.addListener(marker, 'click', (function(marker) {
