@@ -89,6 +89,8 @@ function getJobDetails(annonsId){
             //Get the address and jobName and send to the next function
             address = result.platsannons.arbetsplats.besoksadress;
             jobName = result.platsannons.annons.yrkesbenamning;
+            console.log(result);
+
             initialize(address, jobName);
             
             
