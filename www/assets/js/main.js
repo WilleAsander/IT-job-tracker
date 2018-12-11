@@ -14,6 +14,11 @@ var userURL;
 var userLocal;
 var address;
 var jobName;
+var jobPlats;
+var jobType;
+var jobLenght;
+var jobEmail;
+var jobRegisterday;
 
 //=========================================================================GET YOUR LOCATION===========================================================================================
 //function to start on click of a button
@@ -89,9 +94,15 @@ function getJobDetails(annonsId){
             //Get the address and jobName and send to the next function
             address = result.platsannons.arbetsplats.besoksadress;
             jobName = result.platsannons.annons.yrkesbenamning;
+            jobPlats= result.platsannons.arbetsplats.arbetsplatsnamn;
+            jobType = result.platsannons.villkor.arbetstid;
+            jobEmail = result.platsannons.arbetsplats.epostadress;
+            jobLenght = result.platsannons.villkor.varaktighet;
+            jobRegisterday = result.platsannons.ansokan.sista_ansokningsdag;
+            
             console.log(result);
 
-            initialize(address, jobName);
+            initialize(address, jobName, jobPlats,jobType,jobEmail,jobLenght,jobRegisterday);
             
             
             
@@ -103,7 +114,7 @@ function getJobDetails(annonsId){
 
 //========================================================================MAP CREATION FUNCTON============================================================
 
-function initialize(address, jobName) {
+function initialize(address, jobName,jobPlats,jobType,jobEmail, jobLenght, jobRegisterday) {
     //get our location(right now its coordinates for stockholm for testing purposes, in the future they will be switched with variables ltn and lgt)
     var userLocation = new google.maps.LatLng(59.3293, 18.0686);
     //create a map with our location as the center
@@ -121,6 +132,7 @@ function initialize(address, jobName) {
         {
             markerLtn = results[0].geometry.location.lat;
             markerLgn = results[0].geometry.location.lng;
+            console.log(results[0]);
             //create the marker based of coordinates
             marker = new google.maps.Marker({
                 position: results[0].geometry.location,
@@ -130,7 +142,8 @@ function initialize(address, jobName) {
             //an event that makes the infowindow pop up after marker is clicked
             google.maps.event.addListener(marker, 'click', (function(marker) {
                 return function() {
-                infowindow.setContent(jobName);
+                infowindow.setContent(jobName,jobPlats,jobEmail,jobType,jobLenght,jobRegisterday);
+                infowindow.setContent();
                 infowindow.open(map, marker);
                 }
             })(marker));
