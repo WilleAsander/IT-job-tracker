@@ -14,79 +14,90 @@ var userURL;
 var userLocal;
 var address;
 var jobName;
+var jobWage;
+var linkID;
 var jobPlats;
 var jobType;
 var jobLenght;
 var jobEmail;
 var jobRegisterday;
+var link;
+var markers = [];
+var markerCoor;
+var userMarker;
+
+
+
+
 
 //=========================================================================GET YOUR LOCATION===========================================================================================
 //function to start on click of a button
-$('#locationButton').click(function(){
+$('#locationButton').click(function () {
     //find users current location
-  document.getElementById('map').style.display = "block";
-    if(navigator.geolocation){
-        navigator.geolocation.getCurrentPosition(function(position){ 
+    document.getElementById('map').style.display = "block";
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(function (position) {
             //Users coordinates
             ltn = position.coords.latitude;
             lgt = position.coords.longitude;
-                
+
 
             //Get additional details about users location from google API    
-            $.get( "https://maps.googleapis.com/maps/api/geocode/json?latlng="+ position.coords.latitude + "," + position.coords.longitude +"&key=AIzaSyAXSFjyi9xZvkCtCqfdfpuiNUR_vQNns84&sensor=true", function(data) {
-                    //get the region I.e skogås, stockholm ect. And also get users zip code.
-                    userRegion = data.results[0].address_components[2].long_name;
-                    userZip = data.results[0].address_components[5].long_name;
-                    //remove the space and last two numbers in zip code
-                    userZip = userZip.slice(0, -3);
-                    //merge the new zip code and region to create the necessary url component for the AF API
-                    userURL = userZip + "+" + userRegion;
-                    //send the component to a function
-                    getAmmount(userURL);;
+            $.get("https://maps.googleapis.com/maps/api/geocode/json?latlng=" + position.coords.latitude + "," + position.coords.longitude + "&key=AIzaSyAXSFjyi9xZvkCtCqfdfpuiNUR_vQNns84&sensor=true", function (data) {
+                //get the region I.e skogås, stockholm ect. And also get users zip code.
+                userRegion = data.results[0].address_components[2].long_name;
+                userZip = data.results[0].address_components[5].long_name;
+                //remove the space and last two numbers in zip code
+                userZip = userZip.slice(0, -3);
+                //merge the new zip code and region to create the necessary url component for the AF API
+                userURL = userZip + "+" + userRegion;
+                //send the component to a function
+                getAmmount(userURL);;
             });
-            
-            
+
+
         });
-        
+
     }
     //error message if geolocation isnt supported in browser
-    else{
+    else {
         console.log('geolocation not supported');
     }
 });
 
 //===================================================================================GET JOBS==================================================================================================
-function getAmmount(URL){
+function getAmmount(URL) {
     //for testing purposes since there was no IT jobs avalible at our current location. Remove to get your URL back
     URL = "stockholm";
     $.ajax({
         method: 'GET',
         headers: {
             'Accept': 'application/json',
-            'Accept-Language': 'sv' 
+            'Accept-Language': 'sv'
         },
         //The API with the URL component and the id of IT-jobs from AF API
-        url: 'https://api.arbetsformedlingen.se/af/v0/platsannonser/matchning?nyckelord=' + URL + '&yrkesomradeid=3',
-        success: function(result){
+        
+        url: 'http://api.arbetsformedlingen.se/af/v0/platsannonser/matchning?nyckelord=' + URL + '&yrkesomradeid=3',
+        success: function (result) {
             //A loop that goes through all jobs and send the id of the job to a function
-            for(var i = 0; i < result.matchningslista.matchningdata.length; i++){
+            for (var i = 0; i < result.matchningslista.matchningdata.length; i++) {
                 var annonsId = result.matchningslista.matchningdata[i].annonsid;
                 getJobDetails(annonsId);
             }
-            
-            
-            
+
+
+
         }
     });
 }
 
 
-function getJobDetails(annonsId){
+function getJobDetails(annonsId) {
     $.ajax({
         method: 'GET',
         headers: {
             'Accept': 'application/json',
-            'Accept-Language': 'sv' 
+            'Accept-Language': 'sv'
         },
         //API with the job ID
         url: 'https://api.arbetsformedlingen.se/af/v0/platsannonser/' + annonsId,
@@ -99,10 +110,13 @@ function getJobDetails(annonsId){
             jobEmail = result.platsannons.arbetsplats.epostadress;
             jobLenght = result.platsannons.villkor.varaktighet;
             jobRegisterday = result.platsannons.ansokan.sista_ansokningsdag;
+            jobWage = result.platsannons.villkor.lonetyp;
+            linkID = result.platsannons.annons.annonsid;
+            link = "https://www.arbetsformedlingen.se/For-arbetssokande/Hitta-jobb/Platsbanken/annonser/" + linkID;
             
             console.log(result);
 
-            initialize(address, jobName, jobPlats,jobType,jobEmail,jobLenght,jobRegisterday);
+            initialize(address, jobName, jobPlats,jobType,jobEmail,jobLenght,jobRegisterday,jobWage,linkID,link);
             
             
             
@@ -114,24 +128,51 @@ function getJobDetails(annonsId){
 
 //========================================================================MAP CREATION FUNCTON============================================================
 
-function initialize(address, jobName,jobPlats,jobType,jobEmail, jobLenght, jobRegisterday) {
+function initialize(address, jobName,jobPlats,jobType,jobEmail, jobLenght, jobRegisterday, jobWage,link, linkID) {
     //get our location(right now its coordinates for stockholm for testing purposes, in the future they will be switched with variables ltn and lgt)
     var userLocation = new google.maps.LatLng(59.3293, 18.0686);
     //create a map with our location as the center
     map = new google.maps.Map(document.getElementById('map'), {
         center: userLocation,
         zoom: 15
-        });
+    });
+    //draw radius circle(pure aestetics and don't have any feature)
+    var radius = new google.maps.Circle({
+        strokeColor: '#00FF7F',
+        strokeOpacity: 0.8,
+        strokeWeight: 2,
+        fillColor: '#00FA9A',
+        fillOpacity: 0.35,
+        center: userLocation,
+        radius: 5000,
+        clickable: false,
+        map: map
+    });
     //create the infowindow for displaying info about the location of the marker
-    infowindow = new google.maps.InfoWindow();
+    infowindow= new google.maps.InfoWindow({
+        content:'<p id="hook"></p>'
+    });
     //initialize geocoder
     geocoder = new google.maps.Geocoder();
-    //get the coordinates for the address
-    geocoder.geocode( { 'address': address}, function(results, status) {
-        if (status == google.maps.GeocoderStatus.OK)
-        {
+    //create a user marker based on user location
+    var userIcon = {
+        url: 'https://img.icons8.com/color/50/000000/user-location.png',
+        origin: new google.maps.Point(0, 0),
+        anchor: new google.maps.Point(17, 34),
+        scaledSize: new google.maps.Size(50, 50)
+      };
+    userMarker = new google.maps.Marker({
+        position: userLocation,
+        icon: userIcon,
+        zIndex: 100,
+        map: map
+    });
+    geocoder.geocode({ 'address': address }, function (results, status) {
+        if (status == google.maps.GeocoderStatus.OK) {
+            //get the coordinates for the address
             markerLtn = results[0].geometry.location.lat;
             markerLgn = results[0].geometry.location.lng;
+
             console.log(results[0]);
             //create the marker based of coordinates
             marker = new google.maps.Marker({
@@ -139,14 +180,70 @@ function initialize(address, jobName,jobPlats,jobType,jobEmail, jobLenght, jobRe
                 map: map
             });
 
+            google.maps.event.addListener(infowindow, 'domready', function() {
+
+                // Reference to the DIV that wraps the bottom of infowindow
+                var iwOuter = $('.gm-style-iw');
+            
+                /* Since this div is in a position prior to .gm-div style-iw.
+                 * We use jQuery and create a iwBackground variable,
+                 * and took advantage of the existing reference .gm-style-iw for the previous div with .prev().
+                */
+                var iwBackground = iwOuter.prev();
+            
+                // Removes background shadow DIV
+                iwBackground.children(':nth-child(2)').css({'display' : 'none'});
+            
+                // Removes white background DIV
+                iwBackground.children(':nth-child(4)').css({'display' : 'none'});
+            
+               
+                var iwCloseBtn = iwOuter.next();
+            
+                // Apply the desired effect to the close button
+                
+            
+                // If the content of infowindow not exceed the set maximum height, then the gradient is removed.
+                if($('.iw-content').height() < 150){
+                  $('.iw-bottom-gradient').css({display: 'none'});
+                }
+            
+                // The API automatically applies 0.7 opacity to the button after the mouseout event. This function reverses this event to the desired value.
+                iwCloseBtn.mouseout(function(){
+                  $(this).css({opacity: '1'});
+                });
+              });
+
+
+
+
+
             //an event that makes the infowindow pop up after marker is clicked
             google.maps.event.addListener(marker, 'click', (function(marker) {
                 return function() {
-                infowindow.setContent(jobName,jobPlats,jobEmail,jobType,jobLenght,jobRegisterday);
-                infowindow.setContent();
+                infowindow.setContent(
+                'Annonsnamn: ' + jobName + 
+                '<br> Jobbadress: ' + address +  
+                '<br> Jobbmail: ' + jobEmail + 
+                '<br> Anställningsform: ' + jobType +
+                '<br> Varaktighet: ' + jobLenght +
+                '<br> Lön: ' + jobWage + 
+                '<br><a href="https://www.arbetsformedlingen.se/For-arbetssokande/Hitta-jobb/Platsbanken/annonser/'+link+'">Annonslänk</a>');
+                
                 infowindow.open(map, marker);
+
+            if (radius) map.fitBounds(radius.getBounds());
+            //create the marker based of coordinates and if they fall into radius
+            var distance_from_location = google.maps.geometry.spherical.computeDistanceBetween(userLocation, results[0].geometry.location);
+            if (distance_from_location <= 5000) {
+                marker = new google.maps.Marker({
+                    position: results[0].geometry.location,
+                    map: map
+                });
+            }
+
+
                 }
             })(marker));
         }
-      });
-}
+    });}
