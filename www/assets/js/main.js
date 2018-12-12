@@ -26,10 +26,6 @@ var markers = [];
 var markerCoor;
 var userMarker;
 
-
-
-
-
 //=========================================================================GET YOUR LOCATION===========================================================================================
 //function to start on click of a button
 $('#locationButton').click(function () {
@@ -76,7 +72,6 @@ function getAmmount(URL) {
             'Accept-Language': 'sv'
         },
         //The API with the URL component and the id of IT-jobs from AF API
-        
         url: 'http://api.arbetsformedlingen.se/af/v0/platsannonser/matchning?nyckelord=' + URL + '&yrkesomradeid=3',
         success: function (result) {
             //A loop that goes through all jobs and send the id of the job to a function
@@ -100,8 +95,8 @@ function getJobDetails(annonsId) {
             'Accept-Language': 'sv'
         },
         //API with the job ID
-        url: 'https://api.arbetsformedlingen.se/af/v0/platsannonser/' + annonsId,
-        success: function(result){
+        url: 'http://api.arbetsformedlingen.se/af/v0/platsannonser/' + annonsId,
+        success: function (result) {
             //Get the address and jobName and send to the next function
             address = result.platsannons.arbetsplats.besoksadress;
             jobName = result.platsannons.annons.yrkesbenamning;
@@ -113,13 +108,10 @@ function getJobDetails(annonsId) {
             jobWage = result.platsannons.villkor.lonetyp;
             linkID = result.platsannons.annons.annonsid;
             link = "https://www.arbetsformedlingen.se/For-arbetssokande/Hitta-jobb/Platsbanken/annonser/" + linkID;
-            
-            console.log(result);
-
             initialize(address, jobName, jobPlats,jobType,jobEmail,jobLenght,jobRegisterday,jobWage,linkID,link);
-            
-            
-            
+
+
+
         }
     });
 }
@@ -149,9 +141,7 @@ function initialize(address, jobName,jobPlats,jobType,jobEmail, jobLenght, jobRe
         map: map
     });
     //create the infowindow for displaying info about the location of the marker
-    infowindow= new google.maps.InfoWindow({
-        content:'<p id="hook"></p>'
-    });
+    infowindow = new google.maps.InfoWindow();
     //initialize geocoder
     geocoder = new google.maps.Geocoder();
     //create a user marker based on user location
@@ -172,66 +162,6 @@ function initialize(address, jobName,jobPlats,jobType,jobEmail, jobLenght, jobRe
             //get the coordinates for the address
             markerLtn = results[0].geometry.location.lat;
             markerLgn = results[0].geometry.location.lng;
-
-            console.log(results[0]);
-            //create the marker based of coordinates
-            marker = new google.maps.Marker({
-                position: results[0].geometry.location,
-                map: map
-            });
-
-            google.maps.event.addListener(infowindow, 'domready', function() {
-
-                // Reference to the DIV that wraps the bottom of infowindow
-                var iwOuter = $('.gm-style-iw');
-            
-                /* Since this div is in a position prior to .gm-div style-iw.
-                 * We use jQuery and create a iwBackground variable,
-                 * and took advantage of the existing reference .gm-style-iw for the previous div with .prev().
-                */
-                var iwBackground = iwOuter.prev();
-            
-                // Removes background shadow DIV
-                iwBackground.children(':nth-child(2)').css({'display' : 'none'});
-            
-                // Removes white background DIV
-                iwBackground.children(':nth-child(4)').css({'display' : 'none'});
-            
-               
-                var iwCloseBtn = iwOuter.next();
-            
-                // Apply the desired effect to the close button
-                
-            
-                // If the content of infowindow not exceed the set maximum height, then the gradient is removed.
-                if($('.iw-content').height() < 150){
-                  $('.iw-bottom-gradient').css({display: 'none'});
-                }
-            
-                // The API automatically applies 0.7 opacity to the button after the mouseout event. This function reverses this event to the desired value.
-                iwCloseBtn.mouseout(function(){
-                  $(this).css({opacity: '1'});
-                });
-              });
-
-
-
-
-
-            //an event that makes the infowindow pop up after marker is clicked
-            google.maps.event.addListener(marker, 'click', (function(marker) {
-                return function() {
-                infowindow.setContent(
-                'Annonsnamn: ' + jobName + 
-                '<br> Jobbadress: ' + address +  
-                '<br> Jobbmail: ' + jobEmail + 
-                '<br> Anställningsform: ' + jobType +
-                '<br> Varaktighet: ' + jobLenght +
-                '<br> Lön: ' + jobWage + 
-                '<br><a href="https://www.arbetsformedlingen.se/For-arbetssokande/Hitta-jobb/Platsbanken/annonser/'+link+'">Annonslänk</a>');
-                
-                infowindow.open(map, marker);
-
             if (radius) map.fitBounds(radius.getBounds());
             //create the marker based of coordinates and if they fall into radius
             var distance_from_location = google.maps.geometry.spherical.computeDistanceBetween(userLocation, results[0].geometry.location);
@@ -243,7 +173,21 @@ function initialize(address, jobName,jobPlats,jobType,jobEmail, jobLenght, jobRe
             }
 
 
+
+            //an event that makes the infowindow pop up after marker is clicked
+            google.maps.event.addListener(marker, 'click', (function (marker) {
+                return function () {
+                    infowindow.setContent(
+                        'Annonsnamn: ' + jobName + 
+                        '<br> Jobbadress: ' + address +  
+                        '<br> Jobbmail: ' + jobEmail + 
+                        '<br> Anställningsform: ' + jobType +
+                        '<br> Varaktighet: ' + jobLenght +
+                        '<br> Lön: ' + jobWage + 
+                        '<br><a href="https://www.arbetsformedlingen.se/For-arbetssokande/Hitta-jobb/Platsbanken/annonser/'+link+'">Annonslänk</a>');
+                    infowindow.open(map, marker);
                 }
             })(marker));
         }
-    });}
+    });
+}

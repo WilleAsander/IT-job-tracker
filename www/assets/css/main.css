@@ -36,14 +36,6 @@ header {
 }
 
 .gm-style-iw {
-    background-color: white;
-      border: 3px solid rgba(72, 181, 233, 0.6);
-      border-radius: 10px;
-      padding: 5px;
-      box-shadow: 0 1px 6px rgba(178, 178, 178, 0.6);
-      color: rgb(0, 0, 0) !important;
-      font-family: fantasy;
-      text-align: center;
-      top: 15px !important;
+    
       
   }
