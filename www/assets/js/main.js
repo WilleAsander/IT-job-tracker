@@ -14,6 +14,14 @@ var userURL;
 var userLocal;
 var address;
 var jobName;
+var jobWage;
+var linkID;
+var jobPlats;
+var jobType;
+var jobLenght;
+var jobEmail;
+var jobRegisterday;
+var link;
 var markers = [];
 var markerCoor;
 var userMarker;
@@ -92,7 +100,15 @@ function getJobDetails(annonsId) {
             //Get the address and jobName and send to the next function
             address = result.platsannons.arbetsplats.besoksadress;
             jobName = result.platsannons.annons.yrkesbenamning;
-            initialize(address, jobName);
+            jobPlats= result.platsannons.arbetsplats.arbetsplatsnamn;
+            jobType = result.platsannons.villkor.arbetstid;
+            jobEmail = result.platsannons.arbetsplats.epostadress;
+            jobLenght = result.platsannons.villkor.varaktighet;
+            jobRegisterday = result.platsannons.ansokan.sista_ansokningsdag;
+            jobWage = result.platsannons.villkor.lonetyp;
+            linkID = result.platsannons.annons.annonsid;
+            link = "https://www.arbetsformedlingen.se/For-arbetssokande/Hitta-jobb/Platsbanken/annonser/" + linkID;
+            initialize(address, jobName, jobPlats,jobType,jobEmail,jobLenght,jobRegisterday,jobWage,linkID,link);
 
 
 
@@ -104,7 +120,7 @@ function getJobDetails(annonsId) {
 
 //========================================================================MAP CREATION FUNCTON============================================================
 
-function initialize(address, jobName) {
+function initialize(address, jobName,jobPlats,jobType,jobEmail, jobLenght, jobRegisterday, jobWage,link, linkID) {
     //get our location(right now its coordinates for stockholm for testing purposes, in the future they will be switched with variables ltn and lgt)
     var userLocation = new google.maps.LatLng(59.3293, 18.0686);
     //create a map with our location as the center
@@ -161,7 +177,14 @@ function initialize(address, jobName) {
             //an event that makes the infowindow pop up after marker is clicked
             google.maps.event.addListener(marker, 'click', (function (marker) {
                 return function () {
-                    infowindow.setContent(jobName);
+                    infowindow.setContent(
+                        'Annonsnamn: ' + jobName + 
+                        '<br> Jobbadress: ' + address +  
+                        '<br> Jobbmail: ' + jobEmail + 
+                        '<br> Anställningsform: ' + jobType +
+                        '<br> Varaktighet: ' + jobLenght +
+                        '<br> Lön: ' + jobWage + 
+                        '<br><a href="https://www.arbetsformedlingen.se/For-arbetssokande/Hitta-jobb/Platsbanken/annonser/'+link+'">Annonslänk</a>');
                     infowindow.open(map, marker);
                 }
             })(marker));

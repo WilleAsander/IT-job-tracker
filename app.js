@@ -5,7 +5,7 @@ var register = require('./routers/register');
 var PORT = process.env.PORT || 4242;
 var app = express();
 
-var db_url = 'mongodb://User:Passw0rd@ds227654.mlab.com:27654/itjobb-login';
+var db_url = 'mongodb://User1:passw0rd@ds227654.mlab.com:27654/itjobb-login';
 mongoose.connect(db_url, {useNewUrlParser: true});
 mongoose.Promise = global.Promise;
 var db = mongoose.connection;
