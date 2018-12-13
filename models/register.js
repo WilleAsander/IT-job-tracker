@@ -5,7 +5,7 @@ var bcrypt = require('bcrypt');
 var RegisterSchema = new Schema({
     firstName: {type: String, required: true, max: 100},
     lastName: {type: String, required: true, max: 100},
-    email: {type: String, required: true, max: 100},
+    email: {type: String, required: true, max: 100, unique: true},
     password: {type: String, required: true, max: 100},
     distance: {type: Number, required: true}
 });
@@ -21,5 +21,14 @@ RegisterSchema.pre('save', function (next) {
       next();
     })
 });
+
+RegisterSchema.methods.comparePassword = function(passw, cb){
+  bcrypt.compare(passw, this.password, function(err, isMatch){
+    if(err){
+      return cb(err);
+    }
+    cb(null, isMatch);
+  });
+};
 
 module.exports = mongoose.model('Register', RegisterSchema);

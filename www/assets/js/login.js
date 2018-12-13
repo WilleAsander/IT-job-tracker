@@ -52,27 +52,19 @@ function checkLogin(){
     $("form").submit(function(e){
         e.preventDefault();
     });
+    email = $('#emailLog').val();
+    password = $('#passwordLog').val(); 
+    userData = {
+        email: email,
+        password: password
+
+    };
     $.ajax({
-        method: 'GET',
-        url: 'register',
+        method: 'POST',
+        url: 'api/login',
+        contentType: "application/json",
+        data: JSON.stringify(userData),
         success: function(results){
-            var typedEmail = $('#emailLog').val();
-            for(var i = 0; i < results.length; i++){
-                if(typedEmail == results[i].email){
-                    logIn(results[i]._id);
-                }
-            }
-        }
-    });
-}
-
-
-function logIn(ID){
-    $.ajax({
-        method: 'GET',
-        url: 'register/'+ID,
-        success: function(result){
-            console.log(result);
         }
     });
 }
