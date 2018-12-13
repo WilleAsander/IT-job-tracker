@@ -28,7 +28,7 @@ var userMarker;
 
 //=========================================================================GET YOUR LOCATION===========================================================================================
 //function to start on click of a button
-$('#locationButton').click(function () {
+$(document).ready(function(){
     //find users current location
     document.getElementById('map').style.display = "block";
     if (navigator.geolocation) {
