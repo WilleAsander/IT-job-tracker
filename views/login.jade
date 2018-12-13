@@ -1,0 +1,17 @@
+extend layout
+block content
+    .wrapper.fadeInDown
+        #formContent
+            .fadeIn.first
+                img#icon(src="https://www.b-cube.in/wp-content/uploads/2014/05/aditya-300x177.jpg", alt="User Icon")
+                h1#formTitle Log In
+            form
+                input#emailLog.fadeIn.second(type="text", name="login", placeholder="email")
+                input#passwordLog.fadeIn.third(type="text", name="login", placeholder="password")
+                input.fadeIn.fourth(type="submit", value="Log In", onclick="checkLogin()")
+            #errorFooter
+            #formFooter
+                a.underlineHover(onclick="changeToRegistrationForm()", href="#") Don't have an account?
+    script(type="text/javascript", src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAXSFjyi9xZvkCtCqfdfpuiNUR_vQNns84&libraries=geometry,places")
+    script(src="assets/js/main.js")
+    script(src="assets/js/login.js")

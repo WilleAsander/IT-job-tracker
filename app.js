@@ -11,11 +11,18 @@ mongoose.Promise = global.Promise;
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error: '));
 
+app.set('views', __dirname + '/views');
+app.set('view engine', 'jade');
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 
 app.use('/register', register);
 app.use('/', express.static(__dirname + '/www'));
+
+app.get('/', function(req,res){
+    res.render('login');
+});
 //app.use('/', home);
 
 app.listen(PORT, function(){

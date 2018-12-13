@@ -2,10 +2,11 @@ var Register = require('../models/register');
 
 exports.userRegister = function(req,res){
     var register = new Register({
-        fistName: req.body.firstName,
+        firstName: req.body.firstName,
         lastName: req.body.lastName,
         email: req.body.email,
         password: req.body.password,
+        distance: req.body.distance
     });
 
     
@@ -17,3 +18,19 @@ exports.userRegister = function(req,res){
         res.send('Product created');
     });
 };
+
+exports.list = function(req,res){
+    Register.find(function(err, user){
+        if (err) return next(err);
+
+       res.send(user);
+    });
+};
+
+exports.login = function(req,res){
+    Register.findById(req.params.id, function(err, user){
+        if (err) return next(err);
+
+        res.send(user);
+    });
+}

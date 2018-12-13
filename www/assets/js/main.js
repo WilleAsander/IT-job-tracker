@@ -30,7 +30,7 @@ var userMarker;
 //function to start on click of a button
 $(document).ready(function(){
     //find users current location
-    document.getElementById('map').style.display = "block";
+    $('#map').css('display', 'block');
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(function (position) {
             //Users coordinates
