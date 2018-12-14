@@ -75,7 +75,7 @@ function getAmmount(URL) {
             'Accept-Language': 'sv'
         },
         //The API with the URL component and the id of IT-jobs from AF API
-        url: 'http://api.arbetsformedlingen.se/af/v0/platsannonser/matchning?nyckelord=' + URL + '&yrkesomradeid=3',
+        url: 'https://api.arbetsformedlingen.se/af/v0/platsannonser/matchning?nyckelord=' + URL + '&yrkesomradeid=3',
         success: function (result) {
             //A loop that goes through all jobs and send the id of the job to a function
             for (var i = 0; i < result.matchningslista.matchningdata.length; i++) {
@@ -98,7 +98,7 @@ function getJobDetails(annonsId) {
             'Accept-Language': 'sv'
         },
         //API with the job ID
-        url: 'http://api.arbetsformedlingen.se/af/v0/platsannonser/' + annonsId,
+        url: 'https://api.arbetsformedlingen.se/af/v0/platsannonser/' + annonsId,
         success: function (result) {
             //Get the address and jobName and send to the next function
             address = result.platsannons.arbetsplats.besoksadress;

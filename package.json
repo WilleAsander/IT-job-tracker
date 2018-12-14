@@ -18,8 +18,16 @@
   },
   "homepage": "https://github.com/WilleAsander/IT-job-tracker#readme",
   "dependencies": {
+    "bcrypt": "^3.0.2",
+    "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.18.3",
+    "cookie-parser": "^1.4.3",
     "express": "^4.16.4",
-    "mongoose": "^5.3.14"
+    "https-localhost": "^1.1.4",
+    "jade": "^1.11.0",
+    "jwt-simple": "^0.5.5",
+    "mongoose": "^5.3.14",
+    "passport": "^0.4.0",
+    "passport-jwt": "^4.0.0"
   }
 }
