@@ -1,24 +1,34 @@
 #map {
     height: 100%;
     width: 100%;
-    border-radius: 20px;
-    border: 1px solid black;
-    display: none;
+    float: left;
 }
 
 html, body {
     height: 100%;
-    margin: 0;
-    padding: 0;
 }
 
 .map-container {
+    height: 94.5%;
+    min-width: 100%;
+    z-index: 1;
+    float:left;
+}
+
+.infobox{
     width: 95%;
-    height: 95%;
-    max-height: 90%;
-    float: none;
-    margin:auto;
-    margin-top: 10px;
+    float: left;
+    display: none;
+    z-index: 3;
+    position: absolute;
+    left: 2.5%;
+    border: black solid 1px;
+    bottom: 0%;
+    height: max-content;
+    background-color: white;
+    text-align: left;
+    border-radius: 20px;
+    margin: auto;
 }
 
 header {
@@ -31,32 +41,17 @@ header {
     float: left;
 }
 
-.about-box {
-    width: 600px;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    padding: 10px;
-}
-
-p {
-    white-space: nowrap;
+.jobdetail {
     overflow: hidden;
-    text-overflow: ellipsis;
-    max-width: 120ch;
+    padding: 2%;
+    margin: 2%;
+    width: 95%;
+    border-bottom: 1px black solid;
 }
 
-#hello{
-    border-bottom: 55px;
-    border-color: black;
-    padding: 0px;
-    background-color: black;
-
-}
-
-h1{
-    color: black;
-    font-weight: bold;
-    font-size: 14px;
-}
-.gm-style-iw{ 
-    background-color: brown;
+#closebox {
+    float: right;
+    border-radius: 25px;
+    margin-right: 1.8%;
+    margin-top: 1.9%;
 }

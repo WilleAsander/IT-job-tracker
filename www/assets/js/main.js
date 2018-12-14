@@ -34,7 +34,6 @@ var userMarker;
 //function to start on click of a button
 $(document).ready(function(){
     //find users current location
-    document.getElementById('map').style.display = "block";
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(function (position) {
             //Users coordinates
@@ -120,38 +119,11 @@ function getJobDetails(annonsId) {
     });
 }
 
-//=========================================Email================================================
+//=========================================infobox about jobs================================================
 
-$('mailbutton').click(function() {
-    var transporter = nodemailer.createTransport({
-        service: 'gmail',
-        auth: {
-          user: 'weareteamwei@gmail.com',
-          pass: 'Oneteamtorulethemall'
-        }
-    });
-    
-  var mailOptions = {
-    from: 'wasander13@gmail.com',
-    to: 'tuva@etavo.com',
-    subject: 'Test test',
-    html: '<p>Annonsnamn: ' + jobName + 
-    '<br> Jobbadress: ' + address +  
-    '<br> Jobbmail: ' + jobEmail + 
-    '<br> Anställningsform: ' + jobType +
-    '<br> Varaktighet: ' + jobLenght +
-    '<br> Lön: ' + jobWage + 
-    '<br><a href="https://www.arbetsformedlingen.se/For-arbetssokande/Hitta-jobb/Platsbanken/annonser/'+link+'">Annonslänk</a></p>'
-  };
-
-      transporter.sendMail(mailOptions, function(error, info){
-        if (error) {
-          console.log(error);
-        } else {
-          console.log('Email sent: ' + info.response);
-        }
-      });
-});
+function hide(target) {
+    document.getElementById(target).style.display = 'none';
+}
 
 //========================================================================MAP CREATION FUNCTON============================================================
 
@@ -212,16 +184,18 @@ function initialize(address, jobName,jobPlats,jobType,jobEmail, jobLenght, jobRe
             //an event that makes the infowindow pop up after marker is clicked
             google.maps.event.addListener(marker, 'click', (function (marker) {
                 return function () {
-                    infowindow.setContent(
-                        'Annonsnamn: ' + jobName + 
-                        '<br> Jobbadress: ' + address +  
-                        '<br> Jobbmail: ' + jobEmail + 
-                        '<br> Anställningsform: ' + jobType +
-                        '<br> Varaktighet: ' + jobLenght +
-                        '<br> Lön: ' + jobWage + 
-                        '<br><a href="https://www.arbetsformedlingen.se/For-arbetssokande/Hitta-jobb/Platsbanken/annonser/'+link+'">Annonslänk</a>' + 
-                        '<br><button id="mailbutton" type="button">Mejla till dig</button>');
-                    infowindow.open(map, marker);
+
+                    document.getElementById('infobox').innerHTML = 
+                        '<button type="button" id="closebox" onclick=hide("infobox")>X</button>' +
+                        '<div>' +
+                        '<div class="jobdetail"> Annonsnamn: ' + jobName + '</div>' +
+                        '<div class="jobdetail"> Jobbadress: ' + address +  '</div>' +
+                        '<div class="jobdetail"> Anställningsform: ' + jobType +'</div>' +
+                        '<div class="jobdetail"> Varaktighet: ' + jobLenght +'</div>' +
+                        '<div class="jobdetail"> Lön: ' + jobWage + '</div>' +
+                        '<div class="jobdetail"><a href="https://www.arbetsformedlingen.se/For-arbetssokande/Hitta-jobb/Platsbanken/annonser/'+link+'">Annonslänk</a>' + '</div>' +
+                        '</div>';
+                    document.getElementById('infobox').style.display = "block";
                 }
             })(marker));
         }
