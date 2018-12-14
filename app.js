@@ -67,9 +67,9 @@ apiRoutes.post('/login', function(req,res){
             user.comparePassword(req.body.password, function(err, isMatch){
                 if (isMatch && !err){
                     var token = jwt.encode(user, config.secret);
-                    res.json({success: true, token: 'JWT ' + token});
-                    //res.setHeader('Authorization', 'JWT ' + token);
-                    //res.header('Authorization', 'JWT ' + token).redirect('map');
+                    //res.json({success: true, token: 'JWT ' + token});
+                    res.setHeader('Authorization', 'JWT ' + token);
+                    res.header('Authorization', 'JWT ' + token).redirect('map');
                     
                     
                 }else{
