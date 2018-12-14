@@ -8,6 +8,8 @@ var User = require('./models/register');
 var config = require('./config/database');
 var PORT = process.env.PORT || 4242;
 var app = express();
+var bcrypt = require('bcrypt');
+module.exports.bcrypt = bcrypt;
 
 var db_url = config.database;
 mongoose.connect(db_url, {useNewUrlParser: true});
@@ -32,7 +34,7 @@ app.get('/', function(req,res){
 
 var apiRoutes = express.Router();
 
-/*apiRoutes.post('/signup', function(req, res){
+apiRoutes.post('/signup', function(req, res){
     if (!req.body.email || !req.body.password || !req.body.firstName || !req.body.lastName){
         res.json({success: false, msg: 'Please fill every field'});
     } else{
@@ -113,7 +115,7 @@ getToken = function(headers){
     }else {
         return null;
     }
-}*/
+}
 
 app.use('/api', apiRoutes);
 
