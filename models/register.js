@@ -10,7 +10,7 @@ var RegisterSchema = new Schema({
     distance: {type: Number, required: true}
 });
 
-RegisterSchema.pre('save', function (next) {
+/*RegisterSchema.pre('save', function (next) {
     var user = this;
     
     bcrypt.hash(user.password, 10, function (err, hash){
@@ -20,15 +20,15 @@ RegisterSchema.pre('save', function (next) {
       user.password = hash;
       next();
     })
-});
+});*/
 
-/*RegisterSchema.methods.comparePassword = function(passw, cb){
+RegisterSchema.methods.comparePassword = function(passw, cb){
   bcrypt.compare(passw, this.password, function(err, isMatch){
     if(err){
       return cb(err);
     }
     cb(null, isMatch);
   });
-};*/
+};
 
 module.exports = mongoose.model('Register', RegisterSchema);
