@@ -65,9 +65,27 @@ function checkLogin(){
         contentType: "application/json",
         data: JSON.stringify(userData),
         success: function(results){
+            var token = results;
+            goToMap(token);
         }
     });
 }
+
+function goToMap(token){
+    $.ajax({
+        method: 'GET',
+        headers: {
+            'Authorization': token,
+        },
+        url: 'api/map',
+        success: function (result) {
+
+            window.location.href = result;
+
+        }
+    });
+}
+
    
 
 
@@ -173,7 +191,7 @@ function insertIntoDB(){
         contentType: "application/json",
         data: JSON.stringify(userData),
         success: function(result){
-            console.log(result);
+            changeToLoginForm();
         }
 
     });

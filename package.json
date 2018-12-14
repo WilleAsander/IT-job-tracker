@@ -21,6 +21,7 @@
     "bcrypt": "^3.0.2",
     "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.18.3",
+    "cookie-parser": "^1.4.3",
     "express": "^4.16.4",
     "https-localhost": "^1.1.4",
     "jade": "^1.11.0",

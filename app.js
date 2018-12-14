@@ -10,6 +10,8 @@ var PORT = process.env.PORT || 4242;
 var app = express();
 
 
+
+
 var db_url = config.database;
 mongoose.connect(db_url, {useNewUrlParser: true});
 mongoose.Promise = global.Promise;
@@ -21,7 +23,13 @@ app.set('view engine', 'jade');
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
-
+app.use(function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "http://localhost:4242");
+    res.header("Access-Control-Allow-Headers", "Origin, Authorization, X-Requested-With, Content-Type, Accept");
+    res.header("Access-Control-Allow-Credentials", true);
+    res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+    next();
+});
 app.use(passport.initialize());
 
 app.use('/register', register);
@@ -30,6 +38,9 @@ app.use('/', express.static(__dirname + '/www'));
 app.get('/', function(req,res){
     res.render('login');
 });
+
+
+
 
 var apiRoutes = express.Router();
 
@@ -67,9 +78,9 @@ apiRoutes.post('/login', function(req,res){
             user.comparePassword(req.body.password, function(err, isMatch){
                 if (isMatch && !err){
                     var token = jwt.encode(user, config.secret);
-                    //res.json({success: true, token: 'JWT ' + token});
-                    res.setHeader('Authorization', 'JWT ' + token);
-                    res.header('Authorization', 'JWT ' + token).redirect('map');
+                    //res.json({success: true, token: 'Bearer ' + token});
+                    //res.cookie('auth', 'Bearer ' + token);
+                    res.send('Bearer '+token);
                     
                     
                 }else{
@@ -82,6 +93,7 @@ apiRoutes.post('/login', function(req,res){
 
 apiRoutes.get('/map', passport.authenticate('jwt', {session: false}), function (req, res){
     var token = getToken(req.headers);
+    console.log('Hej');
     if(token){
         var decoded = jwt.decode(token, config.secret);
         User.findOne({
@@ -90,9 +102,9 @@ apiRoutes.get('/map', passport.authenticate('jwt', {session: false}), function (
             if(err) throw err;
 
             if (!user){
-                return res.status(403).send({success: false, msg: 'User not found'})
+                return res.status(403).send({success: false, msg: 'User not found'});
             }else {
-                return res.render('map');
+                return res.send('api/map/home');
 
             }
         })
@@ -100,6 +112,10 @@ apiRoutes.get('/map', passport.authenticate('jwt', {session: false}), function (
         return res.status(403).send({success: false, msg: 'No token provided'});
     }
 
+});
+
+apiRoutes.get('/map/home', function(req,res){
+    res.render('map')
 });
 
 getToken = function(headers){
