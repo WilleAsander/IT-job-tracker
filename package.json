@@ -21,6 +21,7 @@
     "bcrypt": "^3.0.2",
     "body-parser": "^1.18.3",
     "express": "^4.16.4",
+    "https-localhost": "^1.1.4",
     "jade": "^1.11.0",
     "jwt-simple": "^0.5.5",
     "mongoose": "^5.3.14",

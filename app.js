@@ -8,12 +8,19 @@ var User = require('./models/register');
 var config = require('./config/database');
 var PORT = process.env.PORT || 4242;
 var app = express();
+var https = require('https');
+var fs = require('fs');
 
 var db_url = config.database;
 mongoose.connect(db_url, {useNewUrlParser: true});
 mongoose.Promise = global.Promise;
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error: '));
+
+var httpsOptions = {
+    key: fs.readFileSync('./key.pem'),
+    cert: fs.readFileSync('./cert.pem')
+  }
 
 app.set('views', __dirname + '/views');
 app.set('view engine', 'jade');
@@ -22,6 +29,12 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 
 app.use(passport.initialize());
+
+app.use(function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
+  });
 
 app.use('/register', register);
 app.use('/', express.static(__dirname + '/www'));
@@ -66,9 +79,10 @@ apiRoutes.post('/login', function(req,res){
             user.comparePassword(req.body.password, function(err, isMatch){
                 if (isMatch && !err){
                     var token = jwt.encode(user, config.secret);
-                    //res.json({success: true, token: 'JWT ' + token});
-                    res.setHeader('Authorization', 'JWT '+ token);
-                    res.redirect('http://localhost:4242/api/map');
+                    //res.json({success: true, token: 'Bearer ' + token});
+                    res.setHeader('Authorization', 'JWT ' + token);
+                    res.header('Authorization', 'JWT ' + token).redirect('map');
+                    //res.redirect('http://localhost:4242/api/map');
                     
                     
                 }else{
@@ -119,6 +133,10 @@ app.use('/api', apiRoutes);
 require('./config/passport')(passport);
 //app.use('/', home);
 
-app.listen(PORT, function(){
+/*app.listen(PORT, function(){
     console.log('Server up and running');
-});
+});*/
+
+var server = https.createServer(httpsOptions, app).listen(PORT, () => {
+    console.log('server running at ' + PORT);
+  });
