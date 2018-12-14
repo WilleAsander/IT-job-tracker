@@ -8,7 +8,7 @@ var User = require('./models/register');
 var config = require('./config/database');
 var PORT = process.env.PORT || 4242;
 var app = express();
-var bcrypt = require('bcrypt');
+var bcrypt = require('bcrypt-nodejs');
 module.exports.bcrypt = bcrypt;
 
 var db_url = config.database;
