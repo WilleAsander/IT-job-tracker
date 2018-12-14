@@ -26,6 +26,10 @@ var markers = [];
 var markerCoor;
 var userMarker;
 
+
+
+
+
 //=========================================================================GET YOUR LOCATION===========================================================================================
 //function to start on click of a button
 $(document).ready(function(){
@@ -116,7 +120,38 @@ function getJobDetails(annonsId) {
     });
 }
 
+//=========================================Email================================================
 
+$('mailbutton').click(function() {
+    var transporter = nodemailer.createTransport({
+        service: 'gmail',
+        auth: {
+          user: 'weareteamwei@gmail.com',
+          pass: 'Oneteamtorulethemall'
+        }
+    });
+    
+  var mailOptions = {
+    from: 'wasander13@gmail.com',
+    to: 'tuva@etavo.com',
+    subject: 'Test test',
+    html: '<p>Annonsnamn: ' + jobName + 
+    '<br> Jobbadress: ' + address +  
+    '<br> Jobbmail: ' + jobEmail + 
+    '<br> Anställningsform: ' + jobType +
+    '<br> Varaktighet: ' + jobLenght +
+    '<br> Lön: ' + jobWage + 
+    '<br><a href="https://www.arbetsformedlingen.se/For-arbetssokande/Hitta-jobb/Platsbanken/annonser/'+link+'">Annonslänk</a></p>'
+  };
+
+      transporter.sendMail(mailOptions, function(error, info){
+        if (error) {
+          console.log(error);
+        } else {
+          console.log('Email sent: ' + info.response);
+        }
+      });
+});
 
 //========================================================================MAP CREATION FUNCTON============================================================
 
@@ -184,7 +219,8 @@ function initialize(address, jobName,jobPlats,jobType,jobEmail, jobLenght, jobRe
                         '<br> Anställningsform: ' + jobType +
                         '<br> Varaktighet: ' + jobLenght +
                         '<br> Lön: ' + jobWage + 
-                        '<br><a href="https://www.arbetsformedlingen.se/For-arbetssokande/Hitta-jobb/Platsbanken/annonser/'+link+'">Annonslänk</a>');
+                        '<br><a href="https://www.arbetsformedlingen.se/For-arbetssokande/Hitta-jobb/Platsbanken/annonser/'+link+'">Annonslänk</a>' + 
+                        '<br><button id="mailbutton" type="button">Mejla till dig</button>');
                     infowindow.open(map, marker);
                 }
             })(marker));
