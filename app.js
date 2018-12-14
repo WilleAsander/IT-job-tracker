@@ -8,8 +8,7 @@ var User = require('./models/register');
 var config = require('./config/database');
 var PORT = process.env.PORT || 4242;
 var app = express();
-var bcrypt = require('bcrypt-nodejs');
-module.exports.bcrypt = bcrypt;
+
 
 var db_url = config.database;
 mongoose.connect(db_url, {useNewUrlParser: true});
@@ -68,10 +67,9 @@ apiRoutes.post('/login', function(req,res){
             user.comparePassword(req.body.password, function(err, isMatch){
                 if (isMatch && !err){
                     var token = jwt.encode(user, config.secret);
-                    //res.json({success: true, token: 'Bearer ' + token});
-                    res.setHeader('Authorization', 'JWT ' + token);
-                    res.header('Authorization', 'JWT ' + token).redirect('map');
-                    //res.redirect('http://localhost:4242/api/map');
+                    res.json({success: true, token: 'JWT ' + token});
+                    //res.setHeader('Authorization', 'JWT ' + token);
+                    //res.header('Authorization', 'JWT ' + token).redirect('map');
                     
                     
                 }else{

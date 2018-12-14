@@ -1,6 +1,6 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
-var bcrypt = require('../app').bcrypt;
+var bcrypt = require('bcrypt-nodejs');
 
 var RegisterSchema = new Schema({
     firstName: {type: String, required: true, max: 100},
@@ -11,21 +11,23 @@ var RegisterSchema = new Schema({
 });
 
 RegisterSchema.pre('save', function (next) {
-    var user = this;
-    
-    bcrypt.hash(user.password, 10, function (err, hash){
-      if (err) {
-        return next(err);
-      }
-      user.password = hash;
-      next();
-    })
+  var user = this;
+  
+  bcrypt.hash(user.password, null, null, function (err, hash){
+    if (err) {
+      return next(err);
+    }
+    user.password = hash;
+    next();
+  })
 });
 
 RegisterSchema.methods.comparePassword = function(passw, cb){
   bcrypt.compare(passw, this.password, function(err, isMatch){
     if(err){
+      console.log('Too bad mafucka')
       return cb(err);
+
     }
     cb(null, isMatch);
   });
