@@ -15,8 +15,7 @@ block content
             a.left.nav-link
                 i.fas.fa-user#profileIcon(onClick="goToProfile()")
             a.navbar-brand.center(onClick="goToHome()") IT Job
-            a.right.nav-link.dropdown-toggle(href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false") Om Oss
-            .dropdown-menu.about-box(aria-labelledby="dropdownMenuLink") Om oss: Vi vill skapa en web app som underlättar för de som arbetar inom IT att hitta ett jobb inom sitt område. Made by Team W.E.I
+            a.right.nav-link(href="#" role="button" id="dropdownMenuLink" aria-haspopup="true" aria-expanded="false" onClick="goToAbout()") Om Oss
     .map-container.rounded
         #map
 

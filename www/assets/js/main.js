@@ -211,7 +211,7 @@ function goToHome(){
         method: 'GET',
         url: '../../api/map/token',
         success: function(result){
-            goToAuthentication(result);
+            goToAuthenticationHome(result);
         }
     });
 }

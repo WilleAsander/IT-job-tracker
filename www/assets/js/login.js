@@ -13,6 +13,7 @@ function loginPageInit(){
 }
 
 function changeToRegistrationForm(){
+    $('#errorText').remove();
     $('form').empty();
     $('form').append(
         $('<input type="text" id="fName" class="fadeIn second" name="login" placeholder="firstname">').val(firstName),
@@ -32,6 +33,7 @@ function changeToRegistrationForm(){
 }
 
 function changeToLoginForm(){
+    $('#errorText').remove();
     $('form').empty();
     $('form').append(
         $('<input type="text" id="emailLog" class="fadeIn second" name="login" placeholder="email">'),
@@ -54,17 +56,19 @@ function authenticate(){
     email = $('#emailLog').val();
     password = $('#passwordLog').val(); 
     $('#errorText').remove();
+    var counter = 0;
     if($('#emailLog').val() != '' && $('#passwordLog').val() != ''){
         $.ajax({
             method: 'GET',
             url: 'register',
             success: function (result) {
                 for(var i = 0; i < result.length; i++){
+                    counter++;
                     if(result[i].email == email){
                         checkLogin();
-                        return;
+                        break;
                     }
-                    else{
+                    else if(result[i].email != email && counter == result.length){
                         $('#errorText').remove();
                         var $errorP = $('<p id="errorText">').text('The email or password is incorrect!');
                         $errorP.css('color', 'red');
@@ -75,6 +79,7 @@ function authenticate(){
                         $('#emailLog').css('border', '1px solid #ff0000');
 
                     }
+                    
 
 
             }
