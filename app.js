@@ -15,9 +15,6 @@ var lastName;
 var email;
 var distance;
 
-
-
-
 var db_url = config.database;
 mongoose.connect(db_url, {useNewUrlParser: true});
 mongoose.Promise = global.Promise;
@@ -44,9 +41,6 @@ app.use('/', express.static(__dirname + '/www'));
 app.get('/', function(req,res){
     res.render('login');
 });
-
-
-
 
 var apiRoutes = express.Router();
 
