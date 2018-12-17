@@ -19,8 +19,8 @@ function changeToRegistrationForm(){
         $('<input type="text" id="fName" class="fadeIn second" name="login" placeholder="firstname">').val(firstName),
         $('<input type="text" id="lName" class="fadeIn third" name="login" placeholder="lastname">').val(lastName),
         $('<input type="text" id="email" class="fadeIn fourth" name="login" placeholder="email">').val(email),
-        $('<input type="text" id="password" class="fadeIn fifth" name="login" placeholder="password">'),
-        $('<input type="text" id="repeatedPassword" class="fadeIn sixth" name="login" placeholder="repeatedPassword">'),
+        $('<input type="password" id="password" class="fadeIn fifth" name="login" placeholder="password">'),
+        $('<input type="password" id="repeatedPassword" class="fadeIn sixth" name="login" placeholder="repeatedPassword">'),
         $('<input type="submit" class="fadeIn seventh" value="Register" onclick="passwordComf()">')
 
     );
