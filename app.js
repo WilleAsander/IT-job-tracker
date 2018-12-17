@@ -98,6 +98,10 @@ apiRoutes.post('/login', function(req,res){
     });
 });
 
+apiRoutes.get('/map/token', function(req,res){
+    res.send(token);
+});
+
 apiRoutes.get('/map', passport.authenticate('jwt', {session: false}), function (req, res){
     var createdToken = getToken(req.headers);
     if(createdToken){
@@ -111,7 +115,7 @@ apiRoutes.get('/map', passport.authenticate('jwt', {session: false}), function (
                 return res.status(403).send({success: false, msg: 'User not found'});
             }else {
                 passed = true;
-                return res.send('api/map/home');
+                return res.send('../../api/map/home');
 
             }
         })
