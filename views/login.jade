@@ -7,8 +7,8 @@ block content
                 h1#formTitle Log In
             form
                 input#emailLog.fadeIn.second(type="text", name="login", placeholder="email")
-                input#passwordLog.fadeIn.third(type="password", name="login", placeholder="password")
-                input.fadeIn.fourth(type="submit", value="Log In", onclick="checkLogin()")
+                input#passwordLog.fadeIn.third(type="text", name="login", placeholder="password")
+                input.fadeIn.fourth(type="submit", value="Log In", onclick="authenticate()")
             #errorFooter
             #formFooter
                 a.underlineHover(onclick="changeToRegistrationForm()", href="#") Don't have an account?

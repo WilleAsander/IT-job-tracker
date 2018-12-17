@@ -81,6 +81,7 @@ function getAmmount(URL) {
             for (var i = 0; i < result.matchningslista.matchningdata.length; i++) {
                 var annonsId = result.matchningslista.matchningdata[i].annonsid;
                 getJobDetails(annonsId);
+                console.log(URL);
             }
 
 
@@ -112,6 +113,9 @@ function getJobDetails(annonsId) {
             linkID = result.platsannons.annons.annonsid;
             link = "https://www.arbetsformedlingen.se/For-arbetssokande/Hitta-jobb/Platsbanken/annonser/" + linkID;
             initialize(address, jobName, jobPlats,jobType,jobEmail,jobLenght,jobRegisterday,jobWage,linkID,link);
+            
+            console.log(URL);
+            
 
 
 
@@ -199,5 +203,32 @@ function initialize(address, jobName,jobPlats,jobType,jobEmail, jobLenght, jobRe
                 }
             })(marker));
         }
+    });
+}
+
+function goToHome(){
+    $.ajax({
+        method: 'GET',
+        url: '../../api/map/token',
+        success: function(result){
+            goToAuthenticationHome(result);
+        }
+    });
+}
+
+function goToAuthenticationHome(token){
+    $.ajax({
+        method: 'GET',
+        headers: {
+            'Authorization': token,
+        },
+        url: '../../api/map',
+        success: function(result){
+            window.location.href = result;
+            
+            
+
+        }
+
     });
 }

@@ -40,3 +40,30 @@ function detailsGenerate(f, l, e, d){
     });
     
 }
+function goToAbout(){
+    $.ajax({
+        method: 'GET',
+        url: '../../api/about',
+        success: function(result){
+            goToAuthenticationAbout(result);
+        }
+    });
+}
+
+
+function goToAuthenticationAbout(token){
+    $.ajax({
+        method: 'GET',
+        headers: {
+            'Authorization': token,
+        },
+        url: '../../api/about/authenticate',
+        success: function(result){
+            window.location.href = result.url;
+            
+            
+
+        }
+
+    });
+}
