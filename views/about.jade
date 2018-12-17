@@ -6,7 +6,8 @@ block content
             button.navbar-toggler(type="button", data-toggle="collapse", data-target="#navbarNav", aria-controls="navbarNav", aria-expanded="false", aria-label="Toggle navigation")
                 span.navbar-toggler-icon
             .collapse.navbar-collapse#navbarNav
-                
+                ul.navbar-nav
+                    il.nav-item.active
                         a.nav-link(href="#") Jobb Sökare
                             span.sr-only (current)
                         a.right.nav-link(href="#" role="button" id="dropdownMenuLink" aria-haspopup="true" aria-expanded="false" onClick="goToAbout()") Om Oss
@@ -15,12 +16,10 @@ block content
                 i.fas.fa-user#profileIcon(onClick="goToProfile()")
             a.navbar-brand.center(onClick=) Home
             a.right.nav-link(href="#" role="button" id="dropdownMenuLink" aria-haspopup="true" aria-expanded="false" onClick="goToAbout()") Om Oss
-    ul.list-group.list-group-flush
-        li.list-group-item#firstName
-        li.list-group-item#lastName
-        li.list-group-item#email
-        li.list-group-item#distance
-    script(type="text/javascript", src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAXSFjyi9xZvkCtCqfdfpuiNUR_vQNns84&libraries=geometry,places")
-    script(src="../../assets/js/main.js")
-    script(src="../../assets/js/login.js")
-    script(src="../../assets/js/profile.js")
+    div.main#main
+        div.aboutbox#aboutbox
+            h1 - WEI -
+            p On a mission to sucess
+            h2 - ProjectX - 
+            h3 An application what will fuse geolocation with a workplaces nerby.
+             

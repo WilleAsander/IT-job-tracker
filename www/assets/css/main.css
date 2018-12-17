@@ -420,3 +420,41 @@ input:disabled{
       margin: 0 auto;
     }
 }
+
+/* About */
+
+#main{
+  background-color: #f8f9fa;
+  height: 100%;
+  padding-top: 2%;
+
+  
+  
+}
+
+#aboutbox{
+  background-color: white;
+  width: 70%;
+  height: 100%;
+  margin: auto;
+  padding-top: 2%;
+  margin-bottom: 2%;
+  border-radius: 15px;
+  
+}
+
+li{
+  
+  display: inline;
+}
+
+ul{
+  overflow: hidden;
+  list-style-type: 0;
+  display: inline;
+}
+
+.nav-link{
+  display: inline;
+
+}
