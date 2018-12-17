@@ -1,7 +1,7 @@
 extend layout
 block content
     header
-        nav.navbar.navbar-expand-lg.navbar-light.bg-light.deskNav
+        nav.navbar.navbar-light.bg-light.deskNav.navbar-expand-md
             a.navbar-brand(href="#") IT Job
             button.navbar-toggler(type="button", data-toggle="collapse", data-target="#navbarNav", aria-controls="navbarNav", aria-expanded="false", aria-label="Toggle navigation")
                 span.navbar-toggler-icon
@@ -22,7 +22,7 @@ block content
     .map-container.rounded
         #map
 
-       .infobox#infobox
+       div.infobox#infobox
 
     script(type="text/javascript", src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAXSFjyi9xZvkCtCqfdfpuiNUR_vQNns84&libraries=geometry,places")
     script(src="../../assets/js/main.js")

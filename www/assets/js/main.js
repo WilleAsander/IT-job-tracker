@@ -184,18 +184,17 @@ function initialize(address, jobName,jobPlats,jobType,jobEmail, jobLenght, jobRe
             //an event that makes the infowindow pop up after marker is clicked
             google.maps.event.addListener(marker, 'click', (function (marker) {
                 return function () {
-
-                    document.getElementById('infobox').innerHTML = 
-                        '<button type="button" id="closebox" onclick=hide("infobox")>X</button>' +
-                        '<div>' +
-                        '<div class="jobdetail"> Annonsnamn: ' + jobName + '</div>' +
-                        '<div class="jobdetail"> Jobbadress: ' + address +  '</div>' +
-                        '<div class="jobdetail"> Anställningsform: ' + jobType +'</div>' +
-                        '<div class="jobdetail"> Varaktighet: ' + jobLenght +'</div>' +
-                        '<div class="jobdetail"> Lön: ' + jobWage + '</div>' +
-                        '<div class="jobdetail"><a href="https://www.arbetsformedlingen.se/For-arbetssokande/Hitta-jobb/Platsbanken/annonser/'+link+'">Annonslänk</a>' + '</div>' +
+                        document.getElementById('infobox').innerHTML = 
+                        '<button type="button" class="close bg-light" id="closebox" onclick=hide("infobox")>X</button>' +
+                        '<div><h3 class="jobdetail">Detaljer om jobbet</h3>' +
+                        '<div class="jobdetail"><span class="font-weight-bold">Annonsnamn: </span>' + jobName + '</div>' +
+                        '<div class="jobdetail"><span class="font-weight-bold"> Jobbadress: </span>' + address +  '</div>' +
+                        '<div class="jobdetail"><span class="font-weight-bold"> Anställningsform: </span>' + jobType +'</div>' +
+                        '<div class="jobdetail"><span class="font-weight-bold"> Varaktighet: </span>' + jobLenght +'</div>' +
+                        '<div class="jobdetail"><span class="font-weight-bold">Lön: </span>' + jobWage + '</div>' +
+                        '<div class="jobdetail"><span class="font-weight-bold"><a href="https://www.arbetsformedlingen.se/For-arbetssokande/Hitta-jobb/Platsbanken/annonser/'+link+'">Annonslänk</a>' + '</div>' +
                         '</div>';
-                    document.getElementById('infobox').style.display = "block";
+                        document.getElementById('infobox').style.display = "block";                    
                 }
             })(marker));
         }

@@ -6,33 +6,34 @@
 
 html, body {
     height: 100%;
+    overflow: hidden;
 }
 
 .map-container {
-    height: 94.5%;
+    height: 95%;
     min-width: 100%;
     z-index: 1;
     float:left;
 }
 
 .infobox{
-    width: 95%;
+    width: 30%;
     float: left;
     display: none;
-    z-index: 3;
+    z-index: 1;
     position: absolute;
-    left: 2.5%;
-    border: black solid 1px;
-    bottom: 0%;
-    height: max-content;
+    right: 0px;
+    top:0%;
+    padding: 10px;
     background-color: white;
-    text-align: left;
-    border-radius: 20px;
+    border-radius: 10px;
     margin: auto;
+    height: 100%;
 }
 
 header {
     width: 100%;
+    z-index: 2;
 }
 
 #locationButton {
@@ -43,8 +44,8 @@ header {
 
 .jobdetail {
     overflow: hidden;
-    padding: 2%;
     margin: 2%;
+    padding: 2%;
     width: 95%;
     border-bottom: 1px black solid;
 }
@@ -161,7 +162,7 @@ input[type=button]:active, input[type=submit]:active, input[type=reset]:active  
   transform: scale(0.95);
 }
 
-input[type=text], input[type=password] {
+input[type=text], input[type=password]{
   background-color: #f6f6f6;
   border: none;
   color: #0d0d0d;
@@ -366,7 +367,7 @@ h1{
     background-clip: padding-box;
     margin-right: 2%;
 }
-div {
+.logindiv {
     text-align: center;
 }
 .minus:hover{
@@ -396,9 +397,11 @@ input:disabled{
 
 #closebox {
   float: right;
-  border-radius: 25px;
-  margin-right: 1.8%;
-  margin-top: 1.9%;
+  padding: 5px;
+  color:#343a40;
+  border-radius: 10px;
+  margin-right: 1%;
+  margin-top: 0.5%;
 }
 
 #profileIcon{
@@ -421,4 +424,35 @@ input:disabled{
     .brand{
       margin: 0 auto;
     }
+
+    .infobox{
+      width: 95%;
+      float: left;
+      display: none;
+      z-index: 1;
+      position: absolute;
+      background-color: white;
+      border-radius: 10px;
+      margin: auto;
+      height: min-content;
+      top: unset ;
+      bottom: 0;
+      right: 0;
+      left: 0;
+  }
+
+  .jobdetail {
+    overflow: hidden;
+    margin: 2%;
+    padding: 0%;
+    width: 95%;
+    border-bottom: 1px black solid;
+}
+
+.map-container {
+  height: 93%;
+  min-width: 100%;
+  z-index: 1;
+  float:left;
+}
 }
