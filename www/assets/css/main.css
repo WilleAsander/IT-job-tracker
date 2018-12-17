@@ -130,7 +130,8 @@ input[type=button], input[type=submit], input[type=reset]  {
   background-color: #56baed;
   border: none;
   color: white;
-  padding: 15px 80px;
+  padding: 10px;
+  width: 20%;
   text-align: center;
   text-decoration: none;
   display: inline-block;
@@ -384,7 +385,7 @@ input{
     border: 0;
     width: 2%;
 }
-nput::-webkit-outer-spin-button,
+input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
     -webkit-appearance: none;
     margin: 0;
