@@ -6,6 +6,9 @@ var passport = require('passport');
 var jwt = require('jwt-simple');
 var User = require('./models/register');
 var config = require('./config/database');
+var flash = require('express-flash');
+var cookieParser = require('cookie-parser');
+var session = require('express-session');
 var PORT = process.env.PORT || 4242;
 var app = express();
 var passed = false;
@@ -36,13 +39,16 @@ app.use(function(req, res, next) {
     res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
     next();
 });
+app.use(cookieParser());
+app.use(session({saveUninitialized: false, secret: 'something', resave: false}));
+app.use(flash(app));
 app.use(passport.initialize());
 
 app.use('/register', register);
 app.use('/', express.static(__dirname + '/www'));
 
 app.get('/', function(req,res){
-    res.render('login');
+    res.render('login', {messages: ''});
 });
 
 
@@ -78,7 +84,8 @@ apiRoutes.post('/login', function(req,res){
         if (err) throw err;
 
         if(!user){
-            return res.status(403).send({success: false, msg: 'User doesn\'t exist'});
+            return res.send('error');
+            
             
         } else{
             user.comparePassword(req.body.password, function(err, isMatch){
@@ -91,12 +98,18 @@ apiRoutes.post('/login', function(req,res){
                     
                     
                 }else{
-                    return res.status(403).send({success: false, msg: 'Wrong password'}); 
+                    return res.send('error');
                 }
             })
         }
     });
 });
+
+app.get('/error', function(req,res){
+    res.render('login',  {messages: req.flash('info')});
+});
+
+
 
 apiRoutes.get('/map/token', function(req,res){
     res.send(token);
