@@ -6,6 +6,9 @@ var passport = require('passport');
 var jwt = require('jwt-simple');
 var User = require('./models/register');
 var config = require('./config/database');
+var flash = require('express-flash');
+var cookieParser = require('cookie-parser');
+var session = require('express-session');
 var PORT = process.env.PORT || 4242;
 var app = express();
 var passed = false;
@@ -32,12 +35,16 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.get('/about', function(req,res){
     res.send(__dirname+'about.html');
 });
+app.use(cookieParser());
+app.use(session({saveUninitialized: false, secret: 'something', resave: false}));
+app.use(flash(app));
+app.use(passport.initialize());
 
 app.use('/register', register);
 app.use('/', express.static(__dirname + '/www'));
 
 app.get('/', function(req,res){
-    res.render('login');
+    res.render('login', {messages: ''});
 });
 
 
@@ -73,7 +80,8 @@ apiRoutes.post('/login', function(req,res){
         if (err) throw err;
 
         if(!user){
-            return res.status(403).send({success: false, msg: 'User doesn\'t exist'});
+            return res.send('error');
+            
             
         } else{
             user.comparePassword(req.body.password, function(err, isMatch){
@@ -86,11 +94,21 @@ apiRoutes.post('/login', function(req,res){
                     
                     
                 }else{
-                    return res.status(403).send({success: false, msg: 'Wrong password'}); 
+                    return res.send('error');
                 }
             })
         }
     });
+});
+
+app.get('/error', function(req,res){
+    res.render('login',  {messages: req.flash('info')});
+});
+
+
+
+apiRoutes.get('/map/token', function(req,res){
+    res.send(token);
 });
 
 apiRoutes.get('/map', passport.authenticate('jwt', {session: false}), function (req, res){
@@ -106,7 +124,7 @@ apiRoutes.get('/map', passport.authenticate('jwt', {session: false}), function (
                 return res.status(403).send({success: false, msg: 'User not found'});
             }else {
                 passed = true;
-                return res.send('api/map/home');
+                return res.send('../../api/map/home');
 
             }
         })

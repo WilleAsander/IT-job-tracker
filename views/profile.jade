@@ -2,19 +2,21 @@ extend layout
 block content
     header
         nav.navbar.navbar-expand-lg.navbar-light.bg-light.deskNav
-            a.navbar-brand(href="/") Home
+            a.navbar-brand(onClick="goToHome()") IT Job
             button.navbar-toggler(type="button", data-toggle="collapse", data-target="#navbarNav", aria-controls="navbarNav", aria-expanded="false", aria-label="Toggle navigation")
                 span.navbar-toggler-icon
             .collapse.navbar-collapse#navbarNav
-                
-                        a.nav-link(href="#") Jobb Sökare
+                ul.navbar-nav
+                    li.nav-item.active
+                        a.nav-link(onClick="goToHome()") Jobb Sökare
                             span.sr-only (current)
                         a.right.nav-link(href="#" role="button" id="dropdownMenuLink" aria-haspopup="true" aria-expanded="false" onClick="goToAbout()") Om Oss
         nav.navbar.navbar-expand-lg.navbar-light.bg-light.mobileNav
             a.left.nav-link
                 i.fas.fa-user#profileIcon(onClick="goToProfile()")
-            a.navbar-brand.center(onClick=) Home
-            a.right.nav-link(href="#" role="button" id="dropdownMenuLink" aria-haspopup="true" aria-expanded="false" onClick="goToAbout()") Om Oss
+            a.navbar-brand.center(onClick="goToHome()") IT Job
+            a.right.nav-link.dropdown-toggle(href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false") Om Oss
+            .dropdown-menu.about-box(aria-labelledby="dropdownMenuLink") Om oss: Vi vill skapa en web app som underlättar för de som arbetar inom IT att hitta ett jobb inom sitt område. Made by Team W.E.I
     ul.list-group.list-group-flush
         li.list-group-item#firstName
         li.list-group-item#lastName
