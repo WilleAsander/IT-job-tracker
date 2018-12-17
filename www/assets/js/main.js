@@ -201,3 +201,30 @@ function initialize(address, jobName,jobPlats,jobType,jobEmail, jobLenght, jobRe
         }
     });
 }
+
+function goToHome(){
+    $.ajax({
+        method: 'GET',
+        url: '../../api/map/token',
+        success: function(result){
+            goToAuthentication(result);
+        }
+    });
+}
+
+function goToAuthenticationHome(token){
+    $.ajax({
+        method: 'GET',
+        headers: {
+            'Authorization': token,
+        },
+        url: '../../api/map',
+        success: function(result){
+            window.location.href = result;
+            
+            
+
+        }
+
+    });
+}

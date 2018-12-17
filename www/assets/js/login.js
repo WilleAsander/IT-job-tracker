@@ -36,7 +36,7 @@ function changeToLoginForm(){
     $('form').append(
         $('<input type="text" id="emailLog" class="fadeIn second" name="login" placeholder="email">'),
         $('<input type="text" id="passwordLog" class="fadeIn third" name="login" placeholder="password">'),
-        $('<input type="submit" class="fadeIn fourth" value="Log In" onclick="checkLogin()">')
+        $('<input type="submit" class="fadeIn fourth" value="Log In" onclick="authenticate()">')
     );
 
     $('#formFooter').empty();
@@ -47,11 +47,53 @@ function changeToLoginForm(){
     loginPageInit();
 }
 
-
-function checkLogin(){
+function authenticate(){
     $("form").submit(function(e){
         e.preventDefault();
     });
+    email = $('#emailLog').val();
+    password = $('#passwordLog').val(); 
+    $('#errorText').remove();
+    if($('#emailLog').val() != '' && $('#passwordLog').val() != ''){
+        $.ajax({
+            method: 'GET',
+            url: 'register',
+            success: function (result) {
+                for(var i = 0; i < result.length; i++){
+                    if(result[i].email == email){
+                        checkLogin();
+                        return;
+                    }
+                    else{
+                        $('#errorText').remove();
+                        var $errorP = $('<p id="errorText">').text('The email or password is incorrect!');
+                        $errorP.css('color', 'red');
+                        $('#errorFooter').append(
+                            $errorP
+                        );
+                        $('#passwordLog').css('border', '1px solid #ff0000');
+                        $('#emailLog').css('border', '1px solid #ff0000');
+
+                    }
+
+
+            }
+        }
+        });
+    }
+    else{
+        var $errorP = $('<p id="errorText">').text('You have to fill all fields!');
+        $errorP.css('color', 'red');
+        $('#errorFooter').append(
+            $errorP
+        );
+        $('#passwordLog').css('border', '1px solid #ff0000');
+        $('#emailLog').css('border', '1px solid #ff0000');
+    }
+}
+
+
+function checkLogin(){
     email = $('#emailLog').val();
     password = $('#passwordLog').val(); 
     userData = {
@@ -66,7 +108,19 @@ function checkLogin(){
         data: JSON.stringify(userData),
         success: function(results){
             var token = results;
-            goToMap(token);
+            if(token == 'error'){
+                $('#errorText').remove();
+                    var $errorP = $('<p id="errorText">').text('The email or password is incorrect!');
+                    $errorP.css('color', 'red');
+                    $('#errorFooter').append(
+                        $errorP
+                    );
+                    $('#passwordLog').css('border', '1px solid #ff0000');
+                    $('#emailLog').css('border', '1px solid #ff0000');
+            }
+            else{
+                goToMap(token);
+            }
         }
     });
 }
@@ -102,7 +156,7 @@ function passwordComf(){
     $('input[type="text"]').each(function(){
         $(this).css('border', '');
         $('#errorText').remove();
-        if($(this).val()==""){
+        if($(this).val()=="" || $(this).val()==" "){
             empty =true;
             $(this).css('border', '1px solid #ff0000');
             return true;
@@ -117,7 +171,7 @@ function passwordComf(){
             );
     }
 
-    if(repeatedP !=password && repeatedP != ''){
+    else if(repeatedP !=password && repeatedP != ''){
         $errorP = $('<p id="errorText">').text('Your passwords do not match');
             $errorP.css('color', 'red');
             $('#errorFooter').append(
@@ -197,7 +251,5 @@ function insertIntoDB(){
     });
 }
 
-function consoleLog(pass){
-    console.log(pass);
-}
+
 
