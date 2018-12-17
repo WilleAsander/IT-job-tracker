@@ -95,11 +95,6 @@ apiRoutes.post('/login', function(req,res){
     });
 });
 
-app.get('/error', function(req,res){
-    res.render('login',  {messages: req.flash('info')});
-});
-
-
 
 apiRoutes.get('/map/token', function(req,res){
     res.send(token);
@@ -131,6 +126,27 @@ apiRoutes.get('/map', passport.authenticate('jwt', {session: false}), function (
 apiRoutes.get('/map/home', function(req,res){
     if(passed == true){
         res.render('map');
+    }
+    else{
+        res.redirect('/');
+    }
+});
+
+apiRoutes.get('/map/distance', function(req,res){
+    if(passed == true){
+        res.send(token);
+    }
+    else{
+        res.redirect('/');
+    }
+});
+
+apiRoutes.get('/map/distance/decode', function(req,res){
+    var createdToken = getToken(req.headers);
+    var decoded = jwt.decode(createdToken, config.secret);
+    var distance = decoded.distance;
+    if(passed == true){
+        res.send({distance: distance});
     }
     else{
         res.redirect('/');

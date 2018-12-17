@@ -25,14 +25,38 @@ var link;
 var markers = [];
 var markerCoor;
 var userMarker;
+var userDistance;
 
 
 
+$(document).ready(getDistance());
+function getDistance(){
+    $.ajax({
+        method: 'GET',
+        url: 'distance',
+        success: function(result){
+            getDistanceDecode(result);
+        }
+    });
+};
 
+function getDistanceDecode(token){
+    $.ajax({
+        method: 'GET',
+        headers: {
+            'Authorization': token,
+        },
+        url: 'distance/decode',
+        success: function(result){
+            userDistance = result.distance;
+            map();
+        }
+    });
+}
 
 //=========================================================================GET YOUR LOCATION===========================================================================================
 //function to start on click of a button
-$(document).ready(function(){
+function map(){
     //find users current location
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(function (position) {
@@ -62,7 +86,7 @@ $(document).ready(function(){
     else {
         console.log('geolocation not supported');
     }
-});
+}
 
 //===================================================================================GET JOBS==================================================================================================
 function getAmmount(URL) {
@@ -147,7 +171,7 @@ function initialize(address, jobName,jobPlats,jobType,jobEmail, jobLenght, jobRe
         fillColor: '#00FA9A',
         fillOpacity: 0.35,
         center: userLocation,
-        radius: 5000,
+        radius: userDistance * 1000,
         clickable: false,
         map: map
     });
@@ -176,7 +200,7 @@ function initialize(address, jobName,jobPlats,jobType,jobEmail, jobLenght, jobRe
             if (radius) map.fitBounds(radius.getBounds());
             //create the marker based of coordinates and if they fall into radius
             var distance_from_location = google.maps.geometry.spherical.computeDistanceBetween(userLocation, results[0].geometry.location);
-            if (distance_from_location <= 5000) {
+            if (distance_from_location <= userDistance * 1000) {
                 marker = new google.maps.Marker({
                     position: results[0].geometry.location,
                     map: map

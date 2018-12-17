@@ -58,6 +58,7 @@ a {
   display:inline-block;
   text-decoration: none;
   font-weight: 400;
+  margin: 0 auto;
 }
 
 h2 {
@@ -400,8 +401,9 @@ input:disabled{
   margin-top: 1.9%;
 }
 
-#profileIcon{
+.faIcon{
   font-size: 150%;
+  color: #39ace7;
 }
 
 .mobileNav{
