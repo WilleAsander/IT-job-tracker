@@ -8,6 +8,12 @@ var User = require('./models/register');
 var config = require('./config/database');
 var PORT = process.env.PORT || 4242;
 var app = express();
+var passed = false;
+var token;
+var firstName;
+var lastName;
+var email;
+var distance;
 
 
 
@@ -77,10 +83,11 @@ apiRoutes.post('/login', function(req,res){
         } else{
             user.comparePassword(req.body.password, function(err, isMatch){
                 if (isMatch && !err){
-                    var token = jwt.encode(user, config.secret);
+                    var createdToken = jwt.encode(user, config.secret);
+                    token = 'Bearer '+createdToken;
                     //res.json({success: true, token: 'Bearer ' + token});
                     //res.cookie('auth', 'Bearer ' + token);
-                    res.send('Bearer '+token);
+                    res.send('Bearer '+createdToken);
                     
                     
                 }else{
@@ -92,10 +99,9 @@ apiRoutes.post('/login', function(req,res){
 });
 
 apiRoutes.get('/map', passport.authenticate('jwt', {session: false}), function (req, res){
-    var token = getToken(req.headers);
-    console.log('Hej');
-    if(token){
-        var decoded = jwt.decode(token, config.secret);
+    var createdToken = getToken(req.headers);
+    if(createdToken){
+        var decoded = jwt.decode(createdToken, config.secret);
         User.findOne({
             firstName: decoded.firstName
         }, function(err, user){
@@ -104,6 +110,7 @@ apiRoutes.get('/map', passport.authenticate('jwt', {session: false}), function (
             if (!user){
                 return res.status(403).send({success: false, msg: 'User not found'});
             }else {
+                passed = true;
                 return res.send('api/map/home');
 
             }
@@ -115,8 +122,59 @@ apiRoutes.get('/map', passport.authenticate('jwt', {session: false}), function (
 });
 
 apiRoutes.get('/map/home', function(req,res){
-    res.render('map')
+    if(passed == true){
+        res.render('map');
+    }
+    else{
+        res.redirect('/');
+    }
 });
+
+apiRoutes.get('/profile/', function(req,res){
+    res.send(token);
+});
+
+apiRoutes.get('/profile/authenticate', passport.authenticate('jwt', {session: false}), function (req, res){
+    var createdToken = getToken(req.headers);
+    if(createdToken){
+        var decoded = jwt.decode(createdToken, config.secret);
+        firstName = decoded.firstName;
+        lastName = decoded.lastName;
+        email = decoded.email;
+        distance = decoded.distance;
+        User.findOne({
+            firstName: decoded.firstName
+        }, function(err, user){
+            if(err) throw err;
+
+            if (!user){
+                return res.status(403).send({success: false, msg: 'User not found'});
+            }else {
+                return res.send({url: '/api/profile/home'});
+
+            }
+        })
+    }else {
+        return res.status(403).send({success: false, msg: 'No token provided'});
+    }
+
+});
+
+apiRoutes.get('/profile/home', function(req,res){
+    if(passed == true){
+        res.render('profile');
+    }
+    else{
+        res.redirect('/');
+    }
+});
+
+apiRoutes.get('/profile/details', function(req,res){
+    if(passed == true){
+        res.send({firstName : firstName, lastName: lastName, email: email, distance: distance});
+    }
+});
+
 
 getToken = function(headers){
     if(headers && headers.authorization){
