@@ -1,0 +1,25 @@
+extend layout
+block content
+    header
+        nav.navbar.navbar-expand-lg.navbar-light.bg-light.deskNav
+            a.navbar-brand(href="/") Home
+            button.navbar-toggler(type="button", data-toggle="collapse", data-target="#navbarNav", aria-controls="navbarNav", aria-expanded="false", aria-label="Toggle navigation")
+                span.navbar-toggler-icon
+            .collapse.navbar-collapse#navbarNav
+                ul.navbar-nav
+                    il.nav-item.active
+                        a.nav-link(href="#") Jobb Sökare
+                            span.sr-only (current)
+                        a.right.nav-link(href="#" role="button" id="dropdownMenuLink" aria-haspopup="true" aria-expanded="false" onClick="goToAbout()") Om Oss
+        nav.navbar.navbar-expand-lg.navbar-light.bg-light.mobileNav
+            a.left.nav-link
+                i.fas.fa-user#profileIcon(onClick="goToProfile()")
+            a.navbar-brand.center(onClick=) Home
+            a.right.nav-link(href="#" role="button" id="dropdownMenuLink" aria-haspopup="true" aria-expanded="false" onClick="goToAbout()") Om Oss
+    div.main#main
+        div.aboutbox#aboutbox
+            h1 - WEI -
+            p On a mission to sucess
+            h2 - ProjectX - 
+            h3 An application what will fuse geolocation with a workplaces nerby.
+             
