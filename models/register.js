@@ -25,7 +25,6 @@ RegisterSchema.pre('save', function (next) {
 RegisterSchema.methods.comparePassword = function(passw, cb){
   bcrypt.compare(passw, this.password, function(err, isMatch){
     if(err){
-      console.log('Too bad mafucka')
       return cb(err);
 
     }

@@ -1,0 +1,42 @@
+$(document).ready(detailsGenerate());
+
+function goToProfile(){
+    $.ajax({
+        method: 'GET',
+        url: '../../api/profile',
+        success: function(result){
+            goToAuthenticationProfile(result);
+        }
+    });
+}
+
+function goToAuthenticationProfile(token){
+    $.ajax({
+        method: 'GET',
+        headers: {
+            'Authorization': token,
+        },
+        url: '../../api/profile/authenticate',
+        success: function(result){
+            window.location.href = result.url;
+            
+            
+
+        }
+
+    });
+}
+
+function detailsGenerate(f, l, e, d){
+    $.ajax({
+        method: 'GET',
+        url: '../../api/profile/details',
+        success: function(result){
+            $('#firstName').append(result.firstName);
+            $('#lastName').append(result.lastName);
+            $('#email').append(result.email);
+            $('#distance').append(result.distance+' km');
+        }
+    });
+    
+}

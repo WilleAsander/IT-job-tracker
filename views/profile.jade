@@ -2,7 +2,7 @@ extend layout
 block content
     header
         nav.navbar.navbar-expand-lg.navbar-light.bg-light.deskNav
-            a.navbar-brand(href="#") IT Job
+            a.navbar-brand(href="/") Home
             button.navbar-toggler(type="button", data-toggle="collapse", data-target="#navbarNav", aria-controls="navbarNav", aria-expanded="false", aria-label="Toggle navigation")
                 span.navbar-toggler-icon
             .collapse.navbar-collapse#navbarNav
@@ -16,14 +16,15 @@ block content
         nav.navbar.navbar-expand-lg.navbar-light.bg-light.mobileNav
             a.left.nav-link
                 i.fas.fa-user#profileIcon(onClick="goToProfile()")
-            a.navbar-brand.center(href="#") IT Job
+            a.navbar-brand.center(onClick=) Home
             a.right.nav-link.dropdown-toggle(href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false") Om Oss
             .dropdown-menu.about-box(aria-labelledby="dropdownMenuLink") Om oss: Vi vill skapa en web app som underlättar för de som arbetar inom IT att hitta ett jobb inom sitt område. Made by Team W.E.I
-    .map-container.rounded
-        #map
-    .infobox#infobox
+    ul.list-group.list-group-flush
+        li.list-group-item#firstName
+        li.list-group-item#lastName
+        li.list-group-item#email
+        li.list-group-item#distance
     script(type="text/javascript", src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAXSFjyi9xZvkCtCqfdfpuiNUR_vQNns84&libraries=geometry,places")
     script(src="../../assets/js/main.js")
     script(src="../../assets/js/login.js")
     script(src="../../assets/js/profile.js")
-    
