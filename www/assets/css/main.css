@@ -561,8 +561,8 @@ input:disabled{
   float: auto;
   border: 1px black solid;
   width: 70%;
-  
-  
+  padding: 10px;
+  border-radius: 10px;  
 }
 
 .abouttitel{
