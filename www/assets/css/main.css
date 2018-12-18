@@ -427,6 +427,8 @@ input:disabled{
   height: 250px;
 }
 
+
+
 @media only screen and (max-width: 850px) {
     .deskNav{
       display: none;
@@ -474,8 +476,24 @@ input:disabled{
   z-index: 1;
   float:left;
   }
-}
 
+  input[type=text], input[type=password]{
+    width: 75%;
+  }
+
+  
+
+}
+@media only screen and (max-width: 320px){
+  input[type=text], input[type=password]{
+    width: 70%;
+  }
+
+  #icon{
+    display: none;
+  }
+
+}
 /* About */
 
 #main{
@@ -507,3 +525,12 @@ ul{
 .nav-link{
   display: inline;
 }
+
+.modal{
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+
