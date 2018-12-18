@@ -5,8 +5,7 @@ exports.userRegister = function(req,res){
         firstName: req.body.firstName,
         lastName: req.body.lastName,
         email: req.body.email,
-        password: req.body.password,
-        distance: req.body.distance
+        password: req.body.password
     });
 
     
