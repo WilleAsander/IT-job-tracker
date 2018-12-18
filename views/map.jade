@@ -11,6 +11,8 @@ block content
                         a.nav-link(onClick="goToHome()") Jobb Sökare
                             span.sr-only (current)
                         a.right.nav-link(href="#" role="button" id="dropdownMenuLink" aria-haspopup="true" aria-expanded="false" onClick="goToAbout()") Om Oss
+                        a.right.nav-link
+                          i.right.fas.fa-user.faIcon(onClick="goToProfile()")
         nav.navbar.navbar-expand-lg.navbar-light.bg-light.mobileNav
             a.left.nav-link
                 i.fas.fa-user.faIcon(onClick="goToProfile()")

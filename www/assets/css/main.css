@@ -51,8 +51,6 @@ header {
     border-bottom: 1px black solid;
 }
 
-
-
 /* for login and register form */
 
 a {
@@ -72,8 +70,6 @@ h2 {
   margin: 40px 8px 10px 8px; 
   color: #cccccc;
 }
-
-
 
 /* STRUCTURE */
 
@@ -123,8 +119,6 @@ h2.active {
   color: #0d0d0d;
   border-bottom: 2px solid #5fbae9;
 }
-
-
 
 /* FORM TYPOGRAPHY*/
 
@@ -192,8 +186,6 @@ input[type=text]:focus, input[type=password]:focus  {
 input[type=text]:placeholder, input[type=password]:placeholder  {
   color: #cccccc;
 }
-
-
 
 /* ANIMATIONS */
 
@@ -325,12 +317,6 @@ h1{
     outline: none;
 } 
 
-#icon {
-  width:30%;
-}
-
-
-
 /*for the slider*/
 .qty .count {
     color: #000;
@@ -405,7 +391,7 @@ input:disabled{
   margin-top: 0.5%;
 }
 
-.faIcon{
+.fa{
   font-size: 150%;
   color: #39ace7;
 }
@@ -416,6 +402,11 @@ input:disabled{
 
 #mobile-indicator {
   display: none;
+}
+
+#icon {
+  width: 250px;
+  height: 250px;
 }
 
 @media only screen and (max-width: 850px) {
@@ -447,24 +438,24 @@ input:disabled{
       left: 0;
   }
 
-  #mobile-indicator {
+    #mobile-indicator {
     display: block;
   }
 
-  .jobdetail {
+    .jobdetail {
     overflow: hidden;
     margin: 2%;
     padding: 0%;
     width: 95%;
     border-bottom: 1px black solid;
-}
+  } 
 
-.map-container {
+  .map-container {
   height: 93%;
   min-width: 100%;
   z-index: 1;
   float:left;
-}
+  }
 }
 
 /* About */
@@ -473,9 +464,6 @@ input:disabled{
   background-color: #f8f9fa;
   height: 100%;
   padding-top: 2%;
-
-  
-  
 }
 
 #aboutbox{
@@ -486,11 +474,9 @@ input:disabled{
   padding-top: 2%;
   margin-bottom: 2%;
   border-radius: 15px;
-  
 }
 
 li{
-  
   display: inline;
 }
 
@@ -502,5 +488,4 @@ ul{
 
 .nav-link{
   display: inline;
-
 }
