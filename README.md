@@ -27,8 +27,7 @@
 
 - Online version is now up at https://it-jobbwei.herokuapp.com/ 
 
-<<<<<<< HEAD
------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 =======
 ### Login view
 
@@ -46,5 +45,5 @@
 
 ![phone](https://user-images.githubusercontent.com/29252284/50148608-9c8de780-02c1-11e9-8d1f-ed0056f0b8c6.JPG)
 
->>>>>>> db6ce7971418034c0a6f7fbf87c8e5f26c0d12cb
+
 
