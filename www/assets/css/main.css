@@ -533,22 +533,47 @@ input:disabled{
 /* About */
 
 #main{
-  background-color: #f8f9fa;
+  background-color: white;
   height: 100%;
   padding-top: 2%;
+  overflow: scroll;
 }
 
 #aboutbox{
   background-color: white;
-  width: 70%;
-  height: 100%;
+  width: 88%;
+  height: min-content;
   margin: auto;
   padding-top: 2%;
   margin-bottom: 2%;
+<<<<<<< HEAD
+  border-radius: 15px;
+  text-align: left;
+}
+
+::-webkit-scrollbar{
+  width: 0px;
+}
+
+#textbox{
+  margin: auto;
+  text-align: left;
+  height: min-content;
+  float: auto;
+  border: 1px black solid;
+  width: 70%;
+  
+  
+}
+
+.abouttitel{
+  text-align: center;
+=======
   -webkit-box-shadow: 0 10px 30px 0 rgba(95,186,233,0.4);
   box-shadow: 0 10px 30px 0 rgba(95,186,233,0.4);
   -webkit-border-radius: 5px 5px 5px 5px;
   border-radius: 5px 5px 5px 5px;
+>>>>>>> 61a44090ced0d37eefb34a13176d956c0c57dc27
 }
 
 li{
@@ -565,6 +590,10 @@ ul{
   display: inline;
 }
 
+<<<<<<< HEAD
+p{
+  margin: 1%;
+=======
 
 .modal{
   position: fixed;
@@ -576,4 +605,5 @@ ul{
 .align-center {
   text-align: center;
   margin-top: 10px;
+>>>>>>> 61a44090ced0d37eefb34a13176d956c0c57dc27
 }

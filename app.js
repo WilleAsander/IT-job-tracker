@@ -6,9 +6,6 @@ var passport = require('passport');
 var jwt = require('jwt-simple');
 var User = require('./models/register');
 var config = require('./config/database');
-var flash = require('express-flash');
-var cookieParser = require('cookie-parser');
-var session = require('express-session');
 var PORT = process.env.PORT || 4242;
 var app = express();
 var passed = false;
@@ -31,9 +28,7 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.get('/about', function(req,res){
     res.send(__dirname+'about.html');
 });
-app.use(cookieParser());
-app.use(session({saveUninitialized: false, secret: 'something', resave: false}));
-app.use(flash(app));
+
 app.use(passport.initialize());
 
 app.use('/register', register);

@@ -27,6 +27,8 @@
 
 - Online version is now up at https://it-jobbwei.herokuapp.com/ 
 
+<<<<<<< HEAD
+=======
 # Techincal stack 
 
 ### APIs 
@@ -58,6 +60,7 @@
 - Git
 - Github
 
+>>>>>>> 61a44090ced0d37eefb34a13176d956c0c57dc27
 ### Login view
 
 ![login](https://user-images.githubusercontent.com/29252284/50148607-9c8de780-02c1-11e9-8679-4e1b4b37fdd8.png)
@@ -74,5 +77,8 @@
 
 ![phone](https://user-images.githubusercontent.com/29252284/50148608-9c8de780-02c1-11e9-8d1f-ed0056f0b8c6.JPG)
 
+<<<<<<< HEAD
+=======
 
+>>>>>>> 61a44090ced0d37eefb34a13176d956c0c57dc27
 
