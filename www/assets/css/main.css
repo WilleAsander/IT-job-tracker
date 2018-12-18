@@ -29,6 +29,7 @@ html, body {
     border-radius: 10px;
     margin: auto;
     height: 100%;
+    display: none;
 }
 
 header {
@@ -413,6 +414,10 @@ input:disabled{
   display: none;
 }
 
+#mobile-indicator {
+  display: none;
+}
+
 @media only screen and (max-width: 850px) {
     .deskNav{
       display: none;
@@ -440,6 +445,10 @@ input:disabled{
       bottom: 0;
       right: 0;
       left: 0;
+  }
+
+  #mobile-indicator {
+    display: block;
   }
 
   .jobdetail {

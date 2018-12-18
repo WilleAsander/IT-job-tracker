@@ -212,8 +212,17 @@ function initialize(address, jobName,jobPlats,jobType,jobEmail, jobLenght, jobRe
             //an event that makes the infowindow pop up after marker is clicked
             google.maps.event.addListener(marker, 'click', (function (marker) {
                 return function () {
+                        //$('#infobox').css('display', 'none');
+                        //
+                        if($('#infobox').is(':visible')){
+                            toggle();
+                        }
+                        else{
+                           show(); 
+                        }
+
                         document.getElementById('infobox').innerHTML = 
-                        '<button type="button" class="close bg-light" id="closebox" onclick=hide("infobox")>X</button>' +
+                        '<button type="button" class="close bg-light" id="closebox" onclick ="hide()">X</button>' +
                         '<div><h3 class="jobdetail">Detaljer om jobbet</h3>' +
                         '<div class="jobdetail"><span class="font-weight-bold">Annonsnamn: </span>' + jobName + '</div>' +
                         '<div class="jobdetail"><span class="font-weight-bold"> Jobbadress: </span>' + address +  '</div>' +
@@ -222,11 +231,70 @@ function initialize(address, jobName,jobPlats,jobType,jobEmail, jobLenght, jobRe
                         '<div class="jobdetail"><span class="font-weight-bold">Lön: </span>' + jobWage + '</div>' +
                         '<div class="jobdetail"><span class="font-weight-bold"><a href="https://www.arbetsformedlingen.se/For-arbetssokande/Hitta-jobb/Platsbanken/annonser/'+link+'">Annonslänk</a>' + '</div>' +
                         '</div>';
-                        document.getElementById('infobox').style.display = "block";                    
+                        
+                        
+                    
+                                            
                 }
             })(marker));
         }
     });
+}
+
+function show(){
+    if($('#mobile-indicator').is(':visible')){
+            $('#infobox').animate({
+                opacity: 1,
+                height: "show"
+            });
+        }
+        else{
+                $('#infobox').animate({
+                    opacity: 1,
+                    width: "show"
+                });
+        }
+}
+
+
+function hide(){
+    if($('#mobile-indicator').is(':visible')){
+            $("#infobox").animate({
+                opacity: 1,
+                height: "hide"
+            });
+    }
+    else{
+            $('#infobox').animate({
+                opacity: 1,
+                width: "hide"
+            });
+        
+    }
+}
+
+function toggle(callback){
+    if($('#mobile-indicator').is(':visible')){
+        $("#infobox").animate({
+            opacity: 1,
+            height: "toggle"
+        });
+        $("#infobox").animate({
+            opacity: 1,
+            height: "toggle"
+        });
+    }
+    else{
+        $("#infobox").animate({
+            opacity: 1,
+            width: "toggle"
+        });
+
+        $("#infobox").animate({
+            opacity: 1,
+            width: "toggle"
+        });
+    }
 }
 
 function goToHome(){
