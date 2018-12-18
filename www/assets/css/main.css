@@ -79,14 +79,13 @@ h2 {
   justify-content: center;
   width: 100%;
   min-height: 100%;
-  padding: 20px;
+  padding: 0px;
 }
 
 #formContent {
   -webkit-border-radius: 10px 10px 10px 10px;
   border-radius: 10px 10px 10px 10px;
   background: #fff;
-  padding: 30px;
   width: 90%;
   max-width: 450px;
   min-width: 450px;
@@ -103,8 +102,6 @@ h2 {
   border-top: 1px solid #dce8f1;
   padding: 25px;
   text-align: center;
-  -webkit-border-radius: 0 0 10px 10px;
-  border-radius: 0 0 10px 10px;
 }
 
   
@@ -476,12 +473,18 @@ input:disabled{
     display: block;
   }
 
+  #formContent{
+    -webkit-box-shadow: unset;
+    box-shadow: unset;
+
+  }
+
     .jobdetail {
     overflow: hidden;
     margin: 2%;
     padding: 0%;
     width: 95%;
-    border-bottom: 1px black solid;
+
   } 
 
   .map-container {
