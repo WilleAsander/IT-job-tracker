@@ -2,17 +2,17 @@ extend layout
 block content
     header
         nav.navbar.navbar-expand-lg.navbar-light.bg-light.deskNav
-            a.navbar-brand(onClick="goToHome()") IT Job
-            button.navbar-toggler(type="button", data-toggle="collapse", data-target="#navbarNav", aria-controls="navbarNav", aria-expanded="false", aria-label="Toggle navigation")
+            a.navbar-brand(href="#" onClick="goToHome()") IT Job
+            button.navbar-toggler(type="button", data-toggle="collapse", data-target="#navbarNav", aria-controls="navbarNav", aria-expanded="false", aria-label="Toggle navigation" href="#")
                 span.navbar-toggler-icon
             .collapse.navbar-collapse#navbarNav
                 ul.navbar-nav
                     li.nav-item.active
-                        a.nav-link(onClick="goToHome()") Jobb Sökare
+                        a.nav-link( href="#" onClick="goToHome()") Jobb Sökare
                             span.sr-only (current)
                         a.right.nav-link(href="#" role="button" id="dropdownMenuLink" aria-haspopup="true" aria-expanded="false" onClick="goToAbout()") Om Oss
-                        a.right.nav-link
-                          i.right.fas.fa-user.faIcon(onClick="goToProfile()")
+                        a.right.nav-link(href="#")
+                          i.right.fas.fa-user.faIcon(href="#" onClick="goToProfile()")
         nav.navbar.navbar-expand-lg.navbar-light.bg-light.mobileNav
             a.left.nav-link
                 i.fas.fa-user.faIcon(onClick="goToProfile()")
