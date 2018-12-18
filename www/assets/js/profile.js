@@ -35,7 +35,6 @@ function detailsGenerate(f, l, e, d){
             $('#firstName').append(result.firstName);
             $('#lastName').append(result.lastName);
             $('#email').append(result.email);
-            $('#distance').append(result.distance+' km');
         }
     });
     

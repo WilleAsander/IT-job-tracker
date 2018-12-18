@@ -197,41 +197,6 @@ function saveAllForm(){
     lastName = $('#lName').val();
     email = $('#email').val();
     password = $('#password').val();
-    sliderShow();
-}
-
-function sliderShow(){
-    $('form').empty();
-    $('#formFooter').empty();
-    $('#formTitle').text('Please select distance of search radius');
-    $('form').append(
-        $('<div class="qty mt-5 fadeIn fadeIn second">').append(
-            $('<span class="minus bg-dark">').text('-'),
-            $('<input type="number" class="count" name="qty" value="5">'),
-            $('<span class="plus bg-dark">').text('+')
-        ),
-        $('<input type="submit" class="fadeIn third" value="This is fine!" onclick="saveDistance()">')
-    );
-    $(document).ready(function(){
-        $('.count').prop('disabled', true);
-           $(document).on('click','.plus',function(){
-            $('.count').val(parseInt($('.count').val()) + 5 );
-        });
-        $(document).on('click','.minus',function(){
-            $('.count').val(parseInt($('.count').val()) - 5 );
-                if ($('.count').val() == 0) {
-                    $('.count').val(5);
-                }
-            });
-     });
-
-     $('#formFooter').append(
-        $('<a onclick="changeToRegistrationForm()" class="underlineHover" href="#">').text('Back to registration')
-     );
-}
-
-function saveDistance(){
-    distance = $('.count').val();
     insertIntoDB();
 }
 
@@ -240,8 +205,7 @@ function insertIntoDB(){
         firstName: firstName,
         lastName: lastName,
         email: email,
-        password: password,
-        distance: distance
+        password: password
 
     };
     $.ajax({
