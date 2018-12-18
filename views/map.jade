@@ -2,21 +2,19 @@ extend layout
 block content
     header
         nav.navbar.navbar-expand-lg.navbar-light.bg-light.deskNav
-            a.navbar-brand(href="#" onClick="goToHome()") IT Job
+            a.navbar-brand#dropdownMenuLink(href="#" onClick="goToHome()") IT-Jobb
             button.navbar-toggler(type="button", data-toggle="collapse", data-target="#navbarNav", aria-controls="navbarNav", aria-expanded="false", aria-label="Toggle navigation" href="#")
                 span.navbar-toggler-icon
             .collapse.navbar-collapse#navbarNav
                 ul.navbar-nav
                     li.nav-item.active
-                        a.nav-link( href="#" onClick="goToHome()") Jobb Sökare
-                            span.sr-only (current)
                         a.right.nav-link(href="#" role="button" id="dropdownMenuLink" aria-haspopup="true" aria-expanded="false" onClick="goToAbout()") Om Oss
-                        a.right.nav-link(href="#")
+                        a.align-right.nav-link#dropdownMenuLink(href="#" onClick="goToProfile()") Profile 
                           i.right.fas.fa-user.faIcon(onClick="goToProfile()")
         nav.navbar.navbar-expand-lg.navbar-light.bg-light.mobileNav
             a.left.nav-link
                 i.fas.fa-user.faIcon(onClick="goToProfile()")
-            a.center.nav-link
+            a.right.nav-link
                 i.fas.fa-home.faIcon(onClick="goToHome()")
             a.right.nav-link(href="#" role="button" id="dropdownMenuLink" aria-haspopup="true" aria-expanded="false" onClick="goToAbout()") Om Oss
     .map-container.rounded
