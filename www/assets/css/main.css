@@ -6,7 +6,6 @@
 
 html, body {
     height: 100%;
-    overflow: hidden;
 }
 
 .map-container {
@@ -407,10 +406,9 @@ input:disabled{
 
 #mail{
   background-color: #56baed;
-  border: none;
   color: white;
   padding: 10px;
-  width: 40%;
+  width: 50%;
   text-align: center;
   text-decoration: none;
   display: inline-block;
@@ -420,11 +418,30 @@ input:disabled{
   box-shadow: 0 10px 30px 0 rgba(95,186,233,0.4);
   -webkit-border-radius: 5px 5px 5px 5px;
   border-radius: 5px 5px 5px 5px;
-  margin: 5px 20px 40px 20px;
+  margin-bottom: 10px;
 }
 #icon {
   width: 250px;
   height: 250px;
+}
+
+.profileinfo {
+  width: 40%;
+  border: 1px black solid;
+  margin: auto;
+  margin-top: 20px;
+  padding: 10px;
+  -webkit-box-shadow: 0 10px 30px 0 rgba(95,186,233,0.4);
+  box-shadow: 0 10px 30px 0 rgba(95,186,233,0.4);
+  -webkit-border-radius: 5px 5px 5px 5px;
+  border-radius: 5px 5px 5px 5px;
+}
+
+#dropdownMenuLink {
+  text-decoration: none;
+  color: black;
+  font-weight: bold;
+  margin-left: -1px;
 }
 
 @media only screen and (max-width: 850px) {
@@ -474,6 +491,32 @@ input:disabled{
   z-index: 1;
   float:left;
   }
+
+  .wrapper {
+    display: none;
+    margin: auto;
+    align-items: center;
+    flex-direction: column; 
+    justify-content: center;
+    width: 70%;
+    overflow: hidden;
+    min-height: 100%;
+    padding: 20px;
+  }
+
+  .profileinfo {
+    width: 80%;
+    border: 1px black solid;
+    margin: auto;
+    margin-top: 20px;
+    padding: 10px;
+    -webkit-box-shadow: 0 10px 30px 0 rgba(95,186,233,0.4);
+    box-shadow: 0 10px 30px 0 rgba(95,186,233,0.4);
+    -webkit-border-radius: 5px 5px 5px 5px;
+    border-radius: 5px 5px 5px 5px;
+  }
+  
+
 }
 
 /* About */
@@ -491,7 +534,10 @@ input:disabled{
   margin: auto;
   padding-top: 2%;
   margin-bottom: 2%;
-  border-radius: 15px;
+  -webkit-box-shadow: 0 10px 30px 0 rgba(95,186,233,0.4);
+  box-shadow: 0 10px 30px 0 rgba(95,186,233,0.4);
+  -webkit-border-radius: 5px 5px 5px 5px;
+  border-radius: 5px 5px 5px 5px;
 }
 
 li{
@@ -506,4 +552,9 @@ ul{
 
 .nav-link{
   display: inline;
+}
+
+.align-center {
+  text-align: center;
+  margin-top: 10px;
 }

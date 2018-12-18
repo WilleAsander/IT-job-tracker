@@ -2,27 +2,26 @@ extend layout
 block content
     header
         nav.navbar.navbar-expand-lg.navbar-light.bg-light.deskNav
-            a.navbar-brand(href="#" onClick="goToHome()") IT Job
+            a.navbar-brand#dropdownMenuLink(href="#" onClick="goToHome()")  IT-Jobb
             button.navbar-toggler(type="button", data-toggle="collapse", data-target="#navbarNav", aria-controls="navbarNav", aria-expanded="false", aria-label="Toggle navigation" href="#")
                 span.navbar-toggler-icon
             .collapse.navbar-collapse#navbarNav
                 ul.navbar-nav
                     li.nav-item.active
-                        a.nav-link( href="#" onClick="goToHome()") Jobb Sökare
-                            span.sr-only (current)
                         a.right.nav-link(href="#" role="button" id="dropdownMenuLink" aria-haspopup="true" aria-expanded="false" onClick="goToAbout()") Om Oss
-                        a.right.nav-link(href="#")
-                          i.right.fas.fa-user.faIcon(href="#" onClick="goToProfile()")
+                        a.align-right.nav-link#dropdownMenuLink(href="#" onClick="goToProfile()") Profile 
+                          i.right.fas.fa-user.faIcon(onClick="goToProfile()")
         nav.navbar.navbar-expand-lg.navbar-light.bg-light.mobileNav
             a.left.nav-link
                 i.fas.fa-user.faIcon(onClick="goToProfile()")
             a.center.nav-link
                 i.fas.fa-home.faIcon(onClick="goToHome()")
-            a.right.nav-link(href="#" role="button" id="dropdownMenuLink" aria-haspopup="true" aria-expanded="false" onClick="goToAbout()") Om Oss
+            a.right.nav-link(href="#" role="button" id="dropdownMenuLink" onClick="goToAbout()") Om Oss
     ul.list-group.list-group-flush
-        li.list-group-item#firstName
-        li.list-group-item#lastName
-        li.list-group-item#email
+        h3.align-center Din Profil
+        .profileinfo 
+            li.list-group-item#firstName
+            li.list-group-item#email
     script(type="text/javascript", src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAXSFjyi9xZvkCtCqfdfpuiNUR_vQNns84&libraries=geometry,places")
     script(src="../../assets/js/main.js")
     script(src="../../assets/js/login.js")
