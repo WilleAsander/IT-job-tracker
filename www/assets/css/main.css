@@ -456,6 +456,19 @@ input:disabled{
   z-index: 1;
   float:left;
   }
+
+  .wrapper {
+    display: none;
+    margin: auto;
+    align-items: center;
+    flex-direction: column; 
+    justify-content: center;
+    width: 70%;
+    overflow: hidden;
+    min-height: 100%;
+    padding: 20px;
+  }
+  
 }
 
 /* About */
