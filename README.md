@@ -23,4 +23,56 @@
 
 - Close the window in you browser and you are done!
 
-- Thank you for testing our web application, if you have any ideas or thoughts that you would like to share with us you can message us.
+- Thank you for testing our web application, if you have any ideas or thoughts that you would like to share message us at weareteamwei@gmail.com
+
+- Online version is now up at https://it-jobbwei.herokuapp.com/ 
+
+# Techincal stack 
+
+### APIs 
+- Google Places 
+- Google Geometry
+- Arbetsförmedligen
+
+### Hosting services
+- Heroku 
+- Mlabs
+
+### Misc
+- Node
+- JavaScript
+- HTML5
+- Jade
+- CSS3
+- jQuery
+- Mongoose
+- bodyParser
+- passport
+- Express
+- Bootstrap
+- Json
+- Jwt
+- Ajax
+- PostMan
+- BCrypt
+- Git
+- Github
+
+### Login view
+
+![login](https://user-images.githubusercontent.com/29252284/50148607-9c8de780-02c1-11e9-8679-4e1b4b37fdd8.png)
+
+### Register view
+
+![register](https://user-images.githubusercontent.com/29252284/50148609-9c8de780-02c1-11e9-92fd-47cf1152ea0e.JPG)
+
+### Desktop view
+
+![desktop](https://user-images.githubusercontent.com/29252284/50148606-9c8de780-02c1-11e9-9719-7aa75268ff1f.JPG)
+
+### Phone view
+
+![phone](https://user-images.githubusercontent.com/29252284/50148608-9c8de780-02c1-11e9-8d1f-ed0056f0b8c6.JPG)
+
+
+

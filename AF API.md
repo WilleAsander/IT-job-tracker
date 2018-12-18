@@ -22,3 +22,30 @@ Go to headers add 3 keys
 1st Key:Accept  Value: application/xml 
 2nd Key:Accept-Language Value: sv
 3rd Key: From  Value: YOUREMAIL-HERE (optional)
+
+To get this to work on the page you use AJAX calls like this :
+
+$.ajax({
+        method: 'GET', 
+        headers: {
+            'Accept': 'application/json',
+            'Accept-Language': 'sv'
+        },
+        //The API with the URL component and the id of IT-jobs from AF API
+        url: 'https://api.arbetsformedlingen.se/af/v0/platsannonser/matchning?nyckelord=' + URL + '&yrkesomradeid=3',
+        success: function (result) {
+            //A loop that goes through all jobs and send the id of the job to a function
+            for (var i = 0; i < result.matchningslista.matchningdata.length; i++) {
+                var annonsId = result.matchningslista.matchningdata[i].annonsid;
+                getJobDetails(annonsId);
+                
+            }
+
+
+
+        }
+    });
+
+    GET is the option Postman uses to get information, headers are the keys needed for the API to respond to the GET request, further testing showed 
+    you did not need the 3rd key (YOUREMAIL) so it was left out in the progress. 
+    This is then repeated a few times to get the right information, switching out the end of the URL for the right API calls. 

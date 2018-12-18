@@ -32,9 +32,8 @@ function detailsGenerate(f, l, e, d){
         method: 'GET',
         url: '../../api/profile/details',
         success: function(result){
-            $('#firstName').append(result.firstName);
-            $('#lastName').append(result.lastName);
-            $('#email').append(result.email);
+            $('#firstName').append("Namn: " + result.firstName + " " + result.lastName);
+            $('#email').append("Mailaddress: " + result.email);
         }
     });
     
@@ -49,7 +48,6 @@ function goToAbout(){
     });
 }
 
-
 function goToAuthenticationAbout(token){
     $.ajax({
         method: 'GET',
@@ -59,9 +57,6 @@ function goToAuthenticationAbout(token){
         url: '../../api/about/authenticate',
         success: function(result){
             window.location.href = result.url;
-            
-            
-
         }
 
     });
