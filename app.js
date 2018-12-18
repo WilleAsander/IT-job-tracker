@@ -16,7 +16,6 @@ var token;
 var firstName;
 var lastName;
 var email;
-var distance;
 
 var db_url = config.database;
 mongoose.connect(db_url, {useNewUrlParser: true});
@@ -54,8 +53,7 @@ apiRoutes.post('/signup', function(req, res){
             firstName: req.body.firstName,
             lastName: req.body.lastName,
             email: req.body.email,
-            password: req.body.password,
-            distance: req.body.distance
+            password: req.body.password
         });
         newUser.save(function(err){
             if(err){
@@ -144,9 +142,10 @@ apiRoutes.get('/map/distance', function(req,res){
 apiRoutes.get('/map/distance/decode', function(req,res){
     var createdToken = getToken(req.headers);
     var decoded = jwt.decode(createdToken, config.secret);
-    var distance = decoded.distance;
+    var name = decoded.firstName + ' ' + decoded.lastName;
+    var email = decoded.email;
     if(passed == true){
-        res.send({distance: distance});
+        res.send({name: name, email: email});
     }
     else{
         res.redirect('/');
@@ -164,7 +163,6 @@ apiRoutes.get('/profile/authenticate', passport.authenticate('jwt', {session: fa
         firstName = decoded.firstName;
         lastName = decoded.lastName;
         email = decoded.email;
-        distance = decoded.distance;
         User.findOne({
             firstName: decoded.firstName
         }, function(err, user){
@@ -194,7 +192,7 @@ apiRoutes.get('/profile/home', function(req,res){
 
 apiRoutes.get('/profile/details', function(req,res){
     if(passed == true){
-        res.send({firstName : firstName, lastName: lastName, email: email, distance: distance});
+        res.send({firstName : firstName, lastName: lastName, email: email});
     }
 });
 
@@ -211,7 +209,6 @@ apiRoutes.get('/about/authenticate', passport.authenticate('jwt', {session: fals
         firstName = decoded.firstName;
         lastName = decoded.lastName;
         email = decoded.email;
-        distance = decoded.distance;
         User.findOne({
             firstName: decoded.firstName
         }, function(err, user){

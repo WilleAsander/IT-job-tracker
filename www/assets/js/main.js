@@ -25,7 +25,8 @@ var link;
 var markers = [];
 var markerCoor;
 var userMarker;
-var userDistance;
+var userName;
+var userEmail;
 
 
 
@@ -48,7 +49,8 @@ function getDistanceDecode(token){
         },
         url: 'distance/decode',
         success: function(result){
-            userDistance = result.distance;
+            userName = result.name;
+            userEmail = result.email;
             map();
         }
     });
@@ -171,7 +173,7 @@ function initialize(address, jobName,jobPlats,jobType,jobEmail, jobLenght, jobRe
         fillColor: '#00FA9A',
         fillOpacity: 0.35,
         center: userLocation,
-        radius: userDistance * 1000,
+        radius: 5000,
         clickable: false,
         map: map
     });
@@ -200,7 +202,7 @@ function initialize(address, jobName,jobPlats,jobType,jobEmail, jobLenght, jobRe
             if (radius) map.fitBounds(radius.getBounds());
             //create the marker based of coordinates and if they fall into radius
             var distance_from_location = google.maps.geometry.spherical.computeDistanceBetween(userLocation, results[0].geometry.location);
-            if (distance_from_location <= userDistance * 1000) {
+            if (distance_from_location <= 5000) {
                 marker = new google.maps.Marker({
                     position: results[0].geometry.location,
                     map: map
@@ -229,8 +231,12 @@ function initialize(address, jobName,jobPlats,jobType,jobEmail, jobLenght, jobRe
                         '<div class="jobdetail"><span class="font-weight-bold"> Anställningsform: </span>' + jobType +'</div>' +
                         '<div class="jobdetail"><span class="font-weight-bold"> Varaktighet: </span>' + jobLenght +'</div>' +
                         '<div class="jobdetail"><span class="font-weight-bold">Lön: </span>' + jobWage + '</div>' +
-                        '<div class="jobdetail"><span class="font-weight-bold"><a href="https://www.arbetsformedlingen.se/For-arbetssokande/Hitta-jobb/Platsbanken/annonser/'+link+'">Annonslänk</a>' + '</div>' +
-                        '</div>';                     
+                        '<div class="jobdetail"><span class="font-weight-bold"><form action="https://www.arbetsformedlingen.se/For-arbetssokande/Hitta-jobb/Platsbanken/annonser/'+link+'"><button id="mail"></form>View more details</button>' + '</div>' +
+                        '</div>';
+                        
+                        
+                    
+                                            
                 }
             })(marker));
         }
