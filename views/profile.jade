@@ -18,9 +18,10 @@ block content
                 i.fas.fa-user.faIcon(onClick="goToProfile()")
             a.center.nav-link
                 i.fas.fa-home.faIcon(onClick="goToHome()")
-            a.right.nav-link(href="#" role="button" id="dropdownMenuLink" aria-haspopup="true" aria-expanded="false" onClick="goToAbout()") Om Oss
+            a.right.nav-link(href="#" role="button" id="dropdownMenuLink" onClick="goToAbout()") Om Oss
     ul.list-group.list-group-flush
-        .profileinfo
+        h3.align-center Din Profil
+        .profileinfo 
             li.list-group-item#firstName
             li.list-group-item#email
     script(type="text/javascript", src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAXSFjyi9xZvkCtCqfdfpuiNUR_vQNns84&libraries=geometry,places")

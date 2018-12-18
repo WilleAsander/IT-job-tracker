@@ -231,7 +231,7 @@ function initialize(address, jobName,jobPlats,jobType,jobEmail, jobLenght, jobRe
                         '<div class="jobdetail"><span class="font-weight-bold"> Anställningsform: </span>' + jobType +'</div>' +
                         '<div class="jobdetail"><span class="font-weight-bold"> Varaktighet: </span>' + jobLenght +'</div>' +
                         '<div class="jobdetail"><span class="font-weight-bold">Lön: </span>' + jobWage + '</div>' +
-                        '<div class="jobdetail"><span class="font-weight-bold"><form action="https://www.arbetsformedlingen.se/For-arbetssokande/Hitta-jobb/Platsbanken/annonser/'+link+'"><button id="mail"></form>View more details</button>' + '</div>' +
+                        '<div class="jobdetail"><span class="font-weight-bold"><form action="https://www.arbetsformedlingen.se/For-arbetssokande/Hitta-jobb/Platsbanken/annonser/'+link+'"><button id="mail">Mer info</button></form>' + '</div>' +
                         '</div>';
                         
                         
