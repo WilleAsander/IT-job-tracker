@@ -27,6 +27,36 @@
 
 - Online version is now up at https://it-jobbwei.herokuapp.com/ 
 
+# Techincal stack 
+
+### APIs 
+- Google Places 
+- Google Geometry
+- Arbetsförmedligen
+
+### Hosting services
+- Heroku 
+- Mlabs
+
+### Misc
+- Node
+- JavaScript
+- HTML5
+- Jade
+- CSS3
+- jQuery
+- Mongoose
+- bodyParser
+- passport
+- Express
+- Bootstrap
+- Json
+- Jwt
+- Ajax
+- PostMan
+- BCrypt
+- Git
+- Github
 
 ### Login view
 
