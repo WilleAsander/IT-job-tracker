@@ -37,7 +37,7 @@ function changeToLoginForm(){
     $('form').empty();
     $('form').append(
         $('<input type="text" id="emailLog" class="fadeIn second" name="login" placeholder="email">'),
-        $('<input type="text" id="passwordLog" class="fadeIn third" name="login" placeholder="password">'),
+        $('<input type="password" id="passwordLog" class="fadeIn third" name="login" placeholder="password">'),
         $('<input type="submit" class="fadeIn fourth" value="Log In" onclick="authenticate()">')
     );
 
