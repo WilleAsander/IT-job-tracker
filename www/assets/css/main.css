@@ -424,7 +424,6 @@ input:disabled{
   width: 250px;
   height: 250px;
 }
-
 .profileinfo {
   width: 40%;
   border: 1px black solid;
@@ -492,6 +491,9 @@ input:disabled{
   float:left;
   }
 
+  input[type=text], input[type=password]{
+    width: 75%;
+  }
   .wrapper {
     display: none;
     margin: auto;
@@ -518,7 +520,16 @@ input:disabled{
   
 
 }
+@media only screen and (max-width: 320px){
+  input[type=text], input[type=password]{
+    width: 70%;
+  }
 
+  #icon{
+    display: none;
+  }
+
+}
 /* About */
 
 #main{
@@ -552,6 +563,14 @@ ul{
 
 .nav-link{
   display: inline;
+}
+
+
+.modal{
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 .align-center {

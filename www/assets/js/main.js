@@ -93,7 +93,6 @@ function map(){
 //===================================================================================GET JOBS==================================================================================================
 function getAmmount(URL) {
     //for testing purposes since there was no IT jobs avalible at our current location. Remove to get your URL back
-    URL = "stockholm";
     $.ajax({
         method: 'GET',
         headers: {
@@ -103,17 +102,52 @@ function getAmmount(URL) {
         //The API with the URL component and the id of IT-jobs from AF API
         url: 'https://api.arbetsformedlingen.se/af/v0/platsannonser/matchning?nyckelord=' + URL + '&yrkesomradeid=3',
         success: function (result) {
+            console.log(result.matchningslista.antal_platsannonser);
+            if(result.matchningslista.antal_platsannonser == 0){
+                noResults();
+                
+            }
             //A loop that goes through all jobs and send the id of the job to a function
-            for (var i = 0; i < result.matchningslista.matchningdata.length; i++) {
-                var annonsId = result.matchningslista.matchningdata[i].annonsid;
-                getJobDetails(annonsId);
-                console.log(URL);
+            else{
+                for (var i = 0; i < result.matchningslista.matchningdata.length; i++) {
+                    var annonsId = result.matchningslista.matchningdata[i].annonsid;
+                    getJobDetails(annonsId);
+                    console.log(URL);
+                }
             }
 
 
 
         }
     });
+}
+
+function noResults(){
+    loadEmptyMap();
+    $('body').append(
+        $('<div class="modal fade" tabindex="-1" role="dialog" id="modal">').append(
+            $('<div class="modal-dialog" role="document">').append(
+                $('<div class="modal-header">').append(
+                    $('<h5 class="modal-title">').text('No results found! Try again later'),
+                    $('<button type="button" class="close" data-dismiss="modal" aria-label="Close" onClick="closeModal()">').append(
+                        $('<i class="fas fa-times">')
+                    )
+                ),
+                $('<div class="modal-body">').append(
+                    $('<p>').text('There seems to be no jobs available in the area.')
+                )
+            )
+        )
+    );
+    $('.modal').modal('show');
+
+
+    $('.modal-dialog').css('background-color', 'white');
+}
+
+function closeModal(){
+    $('.modal').modal('hide');
+    
 }
 
 
@@ -157,9 +191,30 @@ function hide(target) {
 
 //========================================================================MAP CREATION FUNCTON============================================================
 
+function loadEmptyMap(){
+    var userLocation = new google.maps.LatLng(ltn, lgt);
+    map = new google.maps.Map(document.getElementById('map'), {
+        center: userLocation,
+        zoom: 15
+    });
+    var userIcon = {
+        url: 'https://img.icons8.com/color/50/000000/user-location.png',
+        origin: new google.maps.Point(0, 0),
+        anchor: new google.maps.Point(17, 34),
+        scaledSize: new google.maps.Size(50, 50)
+      };
+    userMarker = new google.maps.Marker({
+        position: userLocation,
+        icon: userIcon,
+        zIndex: 100,
+        map: map
+    });
+
+}
+
 function initialize(address, jobName,jobPlats,jobType,jobEmail, jobLenght, jobRegisterday, jobWage,link, linkID) {
     //get our location(right now its coordinates for stockholm for testing purposes, in the future they will be switched with variables ltn and lgt)
-    var userLocation = new google.maps.LatLng(59.3293, 18.0686);
+    var userLocation = new google.maps.LatLng(ltn, lgt);
     //create a map with our location as the center
     map = new google.maps.Map(document.getElementById('map'), {
         center: userLocation,
