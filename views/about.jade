@@ -21,10 +21,18 @@ block content
             a.right.nav-link(href="#" role="button" id="dropdownMenuLink" aria-haspopup="true" aria-expanded="false" onClick="goToAbout()") Om Oss
     div.main#main
         div.aboutbox#aboutbox
-            h1 - WEI -
-            p On a mission to sucess
-            h2 - ProjectX - 
-            h3 An application what will fuse geolocation with a workplaces nerby.
+            h1.abouttitel - WEI -
+            h4.abouttitel - ProjectX - 
+            div.textbox#textbox
+                h3 DITT NYA IT JOBB NÄRA DIG
+                p Målet med ProjectX var att skapa en application för att hjälpa våra användare hitta IT jobb som ligger närmare och mer lokalt.
+                p Delarna för att få projektet att fungera var lätta på pappret men skulle visa sig en utmaning i verkligheten. Positionera användaren på kartan, ladda ner jobb som matchade användaren för att slutligen jämföra position med jobb för att få rätt slags alternativ.
+                p För att lyckas med detta krävdes fungerande integration mellan Google Places för att få ut användarens nuvarande position, Arbetsförmedligens API för att får fram jobben och Google Geometry för att mäta avståndet till lämpliga arbetsplatser. 
+                br
+                p När projektet flöt på lokalt behövdes en host både för själva appen men även användaruppgifterna, Heroku skulle visa sig vara ett bra alternativ för webappen och Mlabs fungerade för lagringen av användaruppgifterna.
+                br
+                br
+                
     script(type="text/javascript", src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAXSFjyi9xZvkCtCqfdfpuiNUR_vQNns84&libraries=geometry,places")
     script(src="../../assets/js/main.js")
     script(src="../../assets/js/login.js")
