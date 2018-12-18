@@ -23,4 +23,7 @@
 
 - Close the window in you browser and you are done!
 
-- Thank you for testing our web application, if you have any ideas or thoughts that you would like to share with us you can message us.
+- Thank you for testing our web application, if you have any ideas or thoughts that you would like to share message us at weareteamwei@gmail.com
+
+- Online version is now up at https://it-jobbwei.herokuapp.com/ 
+
