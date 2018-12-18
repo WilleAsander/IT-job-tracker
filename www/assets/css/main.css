@@ -51,8 +51,6 @@ header {
     border-bottom: 1px black solid;
 }
 
-
-
 /* for login and register form */
 
 a {
@@ -72,8 +70,6 @@ h2 {
   margin: 40px 8px 10px 8px; 
   color: #cccccc;
 }
-
-
 
 /* STRUCTURE */
 
@@ -123,8 +119,6 @@ h2.active {
   color: #0d0d0d;
   border-bottom: 2px solid #5fbae9;
 }
-
-
 
 /* FORM TYPOGRAPHY*/
 
@@ -192,8 +186,6 @@ input[type=text]:focus, input[type=password]:focus  {
 input[type=text]:placeholder, input[type=password]:placeholder  {
   color: #cccccc;
 }
-
-
 
 /* ANIMATIONS */
 
@@ -324,10 +316,6 @@ h1{
 *:focus {
     outline: none;
 } 
-
-
-
-
 
 /*for the slider*/
 .qty .count {
