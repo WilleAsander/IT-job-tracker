@@ -2,15 +2,23 @@ extend layout
 block content
     header
         nav.navbar.navbar-expand-lg.navbar-light.bg-light.deskNav
-            a.navbar-brand#dropdownMenuLink(href="#" onClick="goToHome()")  IT-Jobb
+            a.navbar-brand#dropdownMenuLink(href="#" onClick="goToHome()") IT-Jobb
             button.navbar-toggler(type="button", data-toggle="collapse", data-target="#navbarNav", aria-controls="navbarNav", aria-expanded="false", aria-label="Toggle navigation" href="#")
                 span.navbar-toggler-icon
             .collapse.navbar-collapse#navbarNav
                 ul.navbar-nav
                     li.nav-item.active
                         a.right.nav-link(href="#" role="button" id="dropdownMenuLink" aria-haspopup="true" aria-expanded="false" onClick="goToAbout()") Om Oss
-                        a.align-right.nav-link#dropdownMenuLink(href="#" onClick="goToProfile()") Profile 
-                          i.right.fas.fa-user.faIcon(onClick="goToProfile()")
+            ul.nav.navbar-nav.navbar-right.dropdown
+                li.nav-item.active
+                    a#dropdownMenuLink.fas.fa-user.faIcon(href="#" data-toggle="collapse" data-target=".dropdown-menu")
+                    &nbsp;
+                    a.dropdown-toggle#dropdownMenuLink.leftList(href="#" data-toggle="collapse" data-target=".dropdown-menu") Profile
+                .dropdown-menu.dropdown-menu-right(aria-labelledby="menu1" onClick="generateDetails()")
+                    p#userName.dropdown-item-text
+                    .dropdown-divider
+                    a.dropdown-item-text(href="#" onClick="goToProfile()") Profile Details
+                    button.btn.btn-danger.dropDownLogOut(role="menuitem" type="button" onClick="logOutToken()") Log Out
         nav.navbar.navbar-expand-lg.navbar-light.bg-light.mobileNav
             a.left.nav-link
                 i.fas.fa-user.faIcon(onClick="goToProfile()")

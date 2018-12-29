@@ -62,7 +62,7 @@ apiRoutes.post('/signup', function(req, res){
 
 apiRoutes.post('/login', function(req,res){
     User.findOne({
-        email: req.body.email
+        email: req.body.email.toLowerCase()
     }, function(err, user){
         if (err) throw err;
 
@@ -71,7 +71,7 @@ apiRoutes.post('/login', function(req,res){
             
             
         } else{
-            user.comparePassword(req.body.password, function(err, isMatch){
+            user.comparePassword(req.body.password.toLowerCase(), function(err, isMatch){
                 if (isMatch && !err){
                     var createdToken = jwt.encode(user, config.secret);
                     token = 'Bearer '+createdToken;
@@ -88,6 +88,40 @@ apiRoutes.post('/login', function(req,res){
     });
 });
 
+apiRoutes.get('/logout', function(req,res){
+    res.send(token);
+});
+
+apiRoutes.get('/logout/authenticate', function(req,res){
+    var createdToken = getToken(req.headers);
+    if(createdToken){
+        var decoded = jwt.decode(createdToken, config.secret);
+        firstName = decoded.firstName;
+        lastName = decoded.lastName;
+        email = decoded.email;
+        User.findOne({
+            email: decoded.email
+        }, function(err, user){
+            if(err) throw err;
+
+            if (!user){
+                return res.status(403).send({success: false, msg: 'User not found'});
+            }else {
+                token = undefined;
+                createdToken = undefined;
+                firstName = undefined;
+                lastName = undefined;
+                email = undefined;
+                passed = false;
+                return res.send({url: '/'});
+
+            }
+        })
+    }else {
+        return res.status(403).send({success: false, msg: 'No token provided'});
+    }
+});
+
 
 apiRoutes.get('/map/token', function(req,res){
     res.send(token);
@@ -97,8 +131,10 @@ apiRoutes.get('/map', passport.authenticate('jwt', {session: false}), function (
     var createdToken = getToken(req.headers);
     if(createdToken){
         var decoded = jwt.decode(createdToken, config.secret);
+        firstName = decoded.firstName;
+        lastName = decoded.lastName;
         User.findOne({
-            firstName: decoded.firstName
+            email: decoded.email
         }, function(err, user){
             if(err) throw err;
 
@@ -159,7 +195,7 @@ apiRoutes.get('/profile/authenticate', passport.authenticate('jwt', {session: fa
         lastName = decoded.lastName;
         email = decoded.email;
         User.findOne({
-            firstName: decoded.firstName
+            email: decoded.email
         }, function(err, user){
             if(err) throw err;
 
@@ -205,7 +241,7 @@ apiRoutes.get('/about/authenticate', passport.authenticate('jwt', {session: fals
         lastName = decoded.lastName;
         email = decoded.email;
         User.findOne({
-            firstName: decoded.firstName
+            email: decoded.email
         }, function(err, user){
             if(err) throw err;
 

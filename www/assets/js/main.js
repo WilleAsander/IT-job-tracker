@@ -128,13 +128,13 @@ function noResults(){
         $('<div class="modal fade" tabindex="-1" role="dialog" id="modal">').append(
             $('<div class="modal-dialog" role="document">').append(
                 $('<div class="modal-header">').append(
-                    $('<h5 class="modal-title">').text('No results found! Try again later'),
+                    $('<h5 class="modal-title">').text('Inga resultat hittades!'),
                     $('<button type="button" class="close" data-dismiss="modal" aria-label="Close" onClick="closeModal()">').append(
                         $('<i class="fas fa-times">')
                     )
                 ),
                 $('<div class="modal-body">').append(
-                    $('<p>').text('There seems to be no jobs available in the area.')
+                    $('<p>').text('Det verkar inte finnas några jobb på denna plats just nu!')
                 )
             )
         )

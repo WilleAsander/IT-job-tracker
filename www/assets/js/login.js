@@ -53,8 +53,8 @@ function authenticate(){
     $("form").submit(function(e){
         e.preventDefault();
     });
-    email = $('#emailLog').val();
-    password = $('#passwordLog').val(); 
+    email = $('#emailLog').val().toLowerCase();
+    password = $('#passwordLog').val().toLowerCase(); 
     $('#errorText').remove();
     var counter = 0;
     if($('#emailLog').val() != '' && $('#passwordLog').val() != ''){
@@ -99,8 +99,9 @@ function authenticate(){
 
 
 function checkLogin(){
-    email = $('#emailLog').val();
-    password = $('#passwordLog').val(); 
+    email = $('#emailLog').val().toLowerCase();
+    password = $('#passwordLog').val().toLowerCase();
+    console.log(email); 
     userData = {
         email: email,
         password: password
@@ -154,9 +155,9 @@ function passwordComf(){
     });
     var firstName = $('#fName').val();
     var lastName = $('#lName').val();
-    var email = $('#email').val();
-    var password = $('#password').val();
-    var repeatedP = $('#repeatedPassword').val();
+    var email = $('#email').val().toLowerCase();
+    var password = $('#password').val().toLowerCase();
+    var repeatedP = $('#repeatedPassword').val().toLowerCase();
     var empty = false;
     $('input[type="text"]').each(function(){
         $(this).css('border', '');
@@ -195,8 +196,8 @@ function passwordComf(){
 function saveAllForm(){
     firstName = $('#fName').val();
     lastName = $('#lName').val();
-    email = $('#email').val();
-    password = $('#password').val();
+    email = $('#email').val().toLowerCase();
+    password = $('#password').val().toLowerCase();
     insertIntoDB();
 }
 
