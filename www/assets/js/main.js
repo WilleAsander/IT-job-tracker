@@ -127,8 +127,73 @@ function createMap(URL){
         mobileSearchBox.setBounds(map.getBounds());
     });
 
+    mobileSearchBox.addListener('places_changed', function() {
+        var places = mobileSearchBox.getPlaces();
+        
+      
+        if (places.length == 0) {
+          return;
+        }
+
+          // For each place, get the icon, name and location.
+          places.forEach(function(place) {
+            if (!place.geometry) {
+              console.log("Returned place contains no geometry");
+              return;
+            }
+
+            // Create a marker for each place.
+            userLocation = place.geometry.location;
+          });
+          userMarker = new google.maps.Marker({
+            position: userLocation,
+            icon: userIcon,
+            zIndex: 100,
+            map: map
+        });
+        map.setCenter(userLocation);
+        radius.setMap(null);
+        radius = new google.maps.Circle({
+            strokeColor: '#00FF7F',
+            strokeOpacity: 0.8,
+            strokeWeight: 2,
+            fillColor: '#00FA9A',
+            fillOpacity: 0.35,
+            center: userLocation,
+            radius: 5000,
+            draggable: true,
+            geodesic: true,
+            map: map
+        });
+        
+        google.maps.event.addListener(radius, 'dragend', function(){
+            userLocation = radius.getCenter();
+            userMarker = new google.maps.Marker({
+                position: userLocation,
+                icon: userIcon,
+                zIndex: 100,
+                map: map
+            });
+            for(i=0; i<markers.length; i++){
+                markers[i].setMap(null);
+            }
+            markers.push(userMarker);
+            getNewPosition(userLocation.lat(), userLocation.lng(), radius);
+            
+        });
+        for(i=0; i<markers.length; i++){
+            markers[i].setMap(null);
+        }
+        markers.push(userMarker);
+        getNewPosition(userLocation.lat(), userLocation.lng(), radius);
+        });
+
+        
+        getAmmount(URL, radius);
+
     searchBox.addListener('places_changed', function() {
         var places = searchBox.getPlaces();
+
       
         if (places.length == 0) {
           return;
