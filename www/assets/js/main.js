@@ -27,6 +27,7 @@ var markerCoor;
 var userMarker;
 var userName;
 var userEmail;
+var radius;
 
 
 
@@ -96,7 +97,7 @@ function createMap(URL){
         center: userLocation,
         zoom: 15
     });
-    var radius = new google.maps.Circle({
+    radius = new google.maps.Circle({
         strokeColor: '#00FF7F',
         strokeOpacity: 0.8,
         strokeWeight: 2,
@@ -108,6 +109,87 @@ function createMap(URL){
         geodesic: true,
         map: map
     });
+    // Create the search box and link it to the UI element.
+    var input = document.getElementById('pac-input');
+    var searchBox = new google.maps.places.SearchBox(input);
+    map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+
+    var mobileInput = document.getElementById('mobileSearch');
+    var mobileSearchBox = new google.maps.places.SearchBox(mobileInput);
+    map.controls[google.maps.ControlPosition.BOTTOM_CENTER].push(mobileInput);
+
+    // Bias the SearchBox results towards current map's viewport.
+    map.addListener('bounds_changed', function() {
+      searchBox.setBounds(map.getBounds());
+    });
+
+    map.addListener('bounds_changed', function() {
+        mobileSearchBox.setBounds(map.getBounds());
+    });
+
+    searchBox.addListener('places_changed', function() {
+        var places = searchBox.getPlaces();
+      
+        if (places.length == 0) {
+          return;
+        }
+
+          // For each place, get the icon, name and location.
+          places.forEach(function(place) {
+            if (!place.geometry) {
+              console.log("Returned place contains no geometry");
+              return;
+            }
+
+            // Create a marker for each place.
+            userLocation = place.geometry.location;
+          });
+          userMarker = new google.maps.Marker({
+            position: userLocation,
+            icon: userIcon,
+            zIndex: 100,
+            map: map
+        });
+        map.setCenter(userLocation);
+        radius.setMap(null);
+        radius = new google.maps.Circle({
+            strokeColor: '#00FF7F',
+            strokeOpacity: 0.8,
+            strokeWeight: 2,
+            fillColor: '#00FA9A',
+            fillOpacity: 0.35,
+            center: userLocation,
+            radius: 5000,
+            draggable: true,
+            geodesic: true,
+            map: map
+        });
+        
+        google.maps.event.addListener(radius, 'dragend', function(){
+            userLocation = radius.getCenter();
+            userMarker = new google.maps.Marker({
+                position: userLocation,
+                icon: userIcon,
+                zIndex: 100,
+                map: map
+            });
+            for(i=0; i<markers.length; i++){
+                markers[i].setMap(null);
+            }
+            markers.push(userMarker);
+            getNewPosition(userLocation.lat(), userLocation.lng(), radius);
+            
+        });
+        for(i=0; i<markers.length; i++){
+            markers[i].setMap(null);
+        }
+        markers.push(userMarker);
+        getNewPosition(userLocation.lat(), userLocation.lng(), radius);
+        });
+
+        
+        getAmmount(URL, radius);
+    
     userLocation = radius.getCenter();
     var userIcon = {
         url: 'https://img.icons8.com/color/50/000000/user-location.png',

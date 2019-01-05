@@ -26,9 +26,12 @@ block content
                 i.fas.fa-home.faIcon(onClick="goToHome()")
             a.right.nav-link(href="#" role="button" id="dropdownMenuLink" aria-haspopup="true" aria-expanded="false" onClick="goToAbout()") Om Oss
     .map-container.rounded
+        input#mobileSearch(type="text" placeholder="Sök")
+        input#pac-input.controls(type="text" placeholder="Sök")
         #map
 
        div.infobox#infobox
+    
     #mobile-indicator
 
     script(type="text/javascript", src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAXSFjyi9xZvkCtCqfdfpuiNUR_vQNns84&libraries=geometry,places")
