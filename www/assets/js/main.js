@@ -105,7 +105,6 @@ function createMap(URL){
         fillOpacity: 0.35,
         center: userLocation,
         radius: 5000,
-        draggable: true,
         geodesic: true,
         map: map
     });
@@ -129,7 +128,8 @@ function createMap(URL){
 
     mobileSearchBox.addListener('places_changed', function() {
         var places = mobileSearchBox.getPlaces();
-        
+        userMarker.setMap(null);
+        userMarker = undefined;
       
         if (places.length == 0) {
           return;
@@ -149,6 +149,7 @@ function createMap(URL){
             position: userLocation,
             icon: userIcon,
             zIndex: 100,
+            draggable: true,
             map: map
         });
         map.setCenter(userLocation);
@@ -161,30 +162,27 @@ function createMap(URL){
             fillOpacity: 0.35,
             center: userLocation,
             radius: 5000,
-            draggable: true,
             geodesic: true,
             map: map
         });
         
-        google.maps.event.addListener(radius, 'dragend', function(){
-            userLocation = radius.getCenter();
-            userMarker = new google.maps.Marker({
-                position: userLocation,
-                icon: userIcon,
-                zIndex: 100,
+        google.maps.event.addListener(userMarker, 'dragend', function(){
+            userLocation = userMarker.getPosition();
+            radius.setMap(null);
+            radius = new google.maps.Circle({
+                strokeColor: '#00FF7F',
+                strokeOpacity: 0.8,
+                strokeWeight: 2,
+                fillColor: '#00FA9A',
+                fillOpacity: 0.35,
+                center: userLocation,
+                radius: 5000,
+                geodesic: true,
                 map: map
             });
-            for(i=0; i<markers.length; i++){
-                markers[i].setMap(null);
-            }
-            markers.push(userMarker);
             getNewPosition(userLocation.lat(), userLocation.lng(), radius);
             
         });
-        for(i=0; i<markers.length; i++){
-            markers[i].setMap(null);
-        }
-        markers.push(userMarker);
         getNewPosition(userLocation.lat(), userLocation.lng(), radius);
         });
 
@@ -193,7 +191,8 @@ function createMap(URL){
 
     searchBox.addListener('places_changed', function() {
         var places = searchBox.getPlaces();
-
+        userMarker.setMap(null);
+        userMarker = undefined;
       
         if (places.length == 0) {
           return;
@@ -213,6 +212,7 @@ function createMap(URL){
             position: userLocation,
             icon: userIcon,
             zIndex: 100,
+            draggable: true,
             map: map
         });
         map.setCenter(userLocation);
@@ -225,30 +225,27 @@ function createMap(URL){
             fillOpacity: 0.35,
             center: userLocation,
             radius: 5000,
-            draggable: true,
             geodesic: true,
             map: map
         });
         
-        google.maps.event.addListener(radius, 'dragend', function(){
-            userLocation = radius.getCenter();
-            userMarker = new google.maps.Marker({
-                position: userLocation,
-                icon: userIcon,
-                zIndex: 100,
+        google.maps.event.addListener(userMarker, 'dragend', function(){
+            userLocation = userMarker.getPosition();
+            radius.setMap(null);
+            radius = new google.maps.Circle({
+                strokeColor: '#00FF7F',
+                strokeOpacity: 0.8,
+                strokeWeight: 2,
+                fillColor: '#00FA9A',
+                fillOpacity: 0.35,
+                center: userLocation,
+                radius: 5000,
+                geodesic: true,
                 map: map
             });
-            for(i=0; i<markers.length; i++){
-                markers[i].setMap(null);
-            }
-            markers.push(userMarker);
             getNewPosition(userLocation.lat(), userLocation.lng(), radius);
             
         });
-        for(i=0; i<markers.length; i++){
-            markers[i].setMap(null);
-        }
-        markers.push(userMarker);
         getNewPosition(userLocation.lat(), userLocation.lng(), radius);
         });
 
@@ -266,21 +263,23 @@ function createMap(URL){
         position: userLocation,
         icon: userIcon,
         zIndex: 100,
+        draggable: true,
         map: map
     });
-    markers.push(userMarker);
-    google.maps.event.addListener(radius, 'dragend', function(){
-        userLocation = radius.getCenter();
-        userMarker = new google.maps.Marker({
-            position: userLocation,
-            icon: userIcon,
-            zIndex: 100,
+    google.maps.event.addListener(userMarker, 'dragend', function(){
+        userLocation = userMarker.getPosition();
+        radius.setMap(null);
+        radius = new google.maps.Circle({
+            strokeColor: '#00FF7F',
+            strokeOpacity: 0.8,
+            strokeWeight: 2,
+            fillColor: '#00FA9A',
+            fillOpacity: 0.35,
+            center: userLocation,
+            radius: 5000,
+            geodesic: true,
             map: map
         });
-        for(i=0; i<markers.length; i++){
-            markers[i].setMap(null);
-        }
-        markers.push(userMarker);
         getNewPosition(userLocation.lat(), userLocation.lng(), radius);
         
     });
@@ -309,6 +308,10 @@ function getNewPosition(userLtn, userLgt, radius){
 
 //===================================================================================GET JOBS==================================================================================================
 function getAmmount(URL, radius) {
+    for (var i = 0; i<markers.length; i++){
+        markers[i].setMap(null);
+    }
+    markers = [];
     //for testing purposes since there was no IT jobs avalible at our current location. Remove to get your URL back
     $.ajax({
         method: 'GET',
